@@ -1685,13 +1685,20 @@
                     keysStoredNotification.style.display = 'block';
                     
                     // Initialize Gemini API with the new key
-                    initializeGeminiApi();
+                    const initialized = initializeGeminiApi();
+                    if (initialized) {
+                        console.log('API initialized after saving key');
+                    } else {
+                        console.error('Failed to initialize API after saving key');
+                    }
                     
                     // Hide notification after 3 seconds
                     setTimeout(() => {
                         keysStoredNotification.style.display = 'none';
                         apiKeyDialog.style.display = 'none';
                     }, 3000);
+                } else {
+                    alert('Please enter a valid API key.');
                 }
             });
             
@@ -1718,8 +1725,10 @@
                         console.error("Error initializing Gemini API:", error);
                         return false;
                     }
+                } else {
+                    console.log("No API key found in localStorage");
+                    return false;
                 }
-                return false;
             }
             
             // Try to initialize on page load
@@ -1926,6 +1935,7 @@
             function handlePointer(eventHandler) {
                 return function(e) {
                     if (e.pointerType === 'pen' || e.pointerType === 'touch' || e.pointerType === 'mouse') {
+                        e.preventDefault();
                         const rect = e.target.getBoundingClientRect();
                         const clientX = e.clientX - rect.left;
                         const clientY = e.clientY - rect.top;
@@ -2147,6 +2157,7 @@
                 }
                 
                 try {
+                    console.log('Sending request to Gemini API for problem:', problemId);
                     // Convert the dataURL to a file blob for Gemini API
                     const fetchResponse = await fetch(imageData);
                     const blob = await fetchResponse.blob();
@@ -2175,10 +2186,13 @@
                       "explanation": "Your detailed explanation of the solution for educational purposes."
                     }`;
                     
+                    console.log('Prompt created, sending API request...');
                     // Call Gemini API
                     const result = await geminiModel.generateContent([prompt, imageFile]);
+                    console.log('API response received:', result);
                     const geminiResponse = await result.response;
                     const text = geminiResponse.text();
+                    console.log('Response text:', text);
                     
                     // Try to parse the JSON response
                     let analysisResult;
