@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH 3195 Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #16a085;
+            --light: #ecf0f1;
+            --bg: #f9f9f9;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --text: #2c3e50;
+            --border: #bdc3c7;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Header navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .header nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .header nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+        
+        .header nav a:hover,
+        .header nav a.active {
+            color: var(--primary);
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        /* API settings button */
+        .api-settings-btn {
+            padding: 6px 12px;
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .api-settings-btn:hover {
+            background-color: var(--light);
+        }
+        
+        button#theme-toggle {
+            padding: 6px 12px;
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 { 
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .header-description {
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            font-size: 1.2rem;
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 12px 0 0 12px;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .card-header i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .card-header h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Study Plan Section */
+        .study-plan {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .study-plan h2 {
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .study-plan h2 i {
+            margin-right: 10px;
+        }
+        
+        .study-plan-steps {
+            list-style: none;
+        }
+        
+        .study-plan-step {
+            display: flex;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .study-plan-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            width: 2px;
+            height: calc(100% - 15px);
+            background-color: var(--border);
+        }
+        
+        .step-content {
+            flex-grow: 1;
+        }
+        
+        .step-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Overall progress section */
+        .overall-progress {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .progress-circle {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .progress-circle svg {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-circle circle {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        
+        .progress-circle .bg {
+            stroke: var(--light);
+        }
+        
+        .progress-circle .fg {
+            stroke: var(--success);
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        /* API key dialog */
+        .api-key-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .api-key-container {
+            background-color: var(--bg);
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+        }
+        
+        .api-key-container h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .api-key-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .api-key-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* Keys stored notification */
+        .keys-stored {
+            display: none;
+            padding: 8px 12px;
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        /* Dark mode */
+        body.dark-mode {
+            --primary: #5dabf0;
+            --primary-dark: #4a8ec8;
+            --secondary: #5d6d7e;
+            --accent: #25c49a;
+            --light: #465161;
+            --bg: #1e272e;
+            --text: #ecf0f1;
+            --border: #455361;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .card,
+        body.dark-mode .study-plan,
+        body.dark-mode .overall-progress,
+        body.dark-mode .header {
+            background-color: #2c3e50;
+            color: var(--text);
+        }
+        
+        body.dark-mode .api-key-container {
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+        
+        body.dark-mode .keys-stored {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+        }
+        
+        body.dark-mode .api-settings-btn,
+        body.dark-mode button#theme-toggle {
+            color: var(--light);
+            border-color: #455361;
+        }
+        
+        body.dark-mode .api-settings-btn:hover,
+        body.dark-mode button#theme-toggle:hover {
+            background-color: #364c63;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
+            }
+            
+            .header nav {
+                margin-bottom: 1rem;
+            }
+            
+            .header-right {
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+            
+            .api-settings-btn {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="review.html">Review</a>
+            <a href="practice.html">Practice</a>
+        </nav>
+        <div class="header-right">
+            <button class="api-settings-btn" id="apiSettingsBtn">
+                <i class="fas fa-key"></i> API Settings
+            </button>
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-square-root-alt"></i> MATH 3195 Study Dashboard</h1>
+            <p class="header-description">Track your progress, create a study plan, and prepare effectively for Exam 2</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="overall-progress">
+            <h2><i class="fas fa-chart-line"></i> Your Overall Progress</h2>
+            <div class="progress-circle">
+                <svg width="150" height="150" viewBox="0 0 150 150">
+                    <circle class="bg" cx="75" cy="75" r="65" stroke-dasharray="408" stroke-dashoffset="0" />
+                    <circle class="fg" cx="75" cy="75" r="65" stroke-dasharray="408" stroke-dashoffset="408" />
+                </svg>
+                <div class="progress-text">0%</div>
+            </div>
+            <p><span id="completed-skills">0</span> of <span id="total-skills">9</span> skills mastered</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-vector-square"></i>
+                    <h3>Vector Spaces</h3>
+                </div>
+                <p>Master concepts of linear independence, span, basis, and orthogonality.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="vector-progress" style="width: 0%"></div>
+                </div>
+                <p><span class="skills-count">0/5</span> skills mastered</p>
+                <div class="card-actions">
+                    <a href="review.html#vector-spaces" class="btn btn-primary"><i class="fas fa-book"></i> Study</a>
+                    <a href="practice.html#vector-spaces" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Practice</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-superscript"></i>
+                    <h3>Differential Equations</h3>
+                </div>
+                <p>Understand linear DE concepts, Wronskian, and solution techniques.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="diff-eq-progress" style="width: 0%"></div>
+                </div>
+                <p><span class="skills-count">0/4</span> skills mastered</p>
+                <div class="card-actions">
+                    <a href="review.html#diff-equations" class="btn btn-primary"><i class="fas fa-book"></i> Study</a>
+                    <a href="practice.html#diff-equations" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Practice</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-pen-fancy"></i>
+                    <h3>Handwritten Solutions</h3>
+                </div>
+                <p>Practice writing solutions by hand and get feedback using AI.</p>
+                <p class="note">Use a tablet pen for the best experience!</p>
+                <div class="card-actions">
+                    <a href="review.html" class="btn btn-primary"><i class="fas fa-tablet-alt"></i> Try It Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="study-plan">
+            <h2><i class="fas fa-calendar-alt"></i> Recommended Study Plan</h2>
+            <ul class="study-plan-steps">
+                <li class="study-plan-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Review Core Concepts</h4>
+                        <p>Start with the fundamentals of vector spaces and linear independence.</p>
+                        <a href="review.html#linear-independence" class="btn btn-secondary">Begin Here</a>
+                    </div>
+                </li>
+                <li class="study-plan-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Practice Basic Problems</h4>
+                        <p>Solve practice problems on linear independence and span.</p>
+                        <a href="practice.html#basic" class="btn btn-secondary">Practice Now</a>
+                    </div>
+                </li>
+                <li class="study-plan-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Learn Row/Column/Null Space Concepts</h4>
+                        <p>Advance to more complex concepts of basis and fundamental spaces.</p>
+                        <a href="review.html#basis-space" class="btn btn-secondary">Study Spaces</a>
+                    </div>
+                </li>
+                <li class="study-plan-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Tackle Differential Equations</h4>
+                        <p>Move on to higher-order linear differential equations.</p>
+                        <a href="review.html#diff-equations" class="btn btn-secondary">Study DEs</a>
+                    </div>
+                </li>
+                <li class="study-plan-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Comprehensive Practice</h4>
+                        <p>Test your knowledge with mixed practice problems from all topics.</p>
+                        <a href="practice.html#comprehensive" class="btn btn-secondary">Final Practice</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- API Key Dialog -->
+    <div class="api-key-dialog" id="apiKeyDialog">
+        <div class="api-key-container">
+            <h3>Gemini API Settings</h3>
+            <p>Enter your Gemini API key to enable AI-powered handwriting recognition and solution checking.</p>
+            <div class="keys-stored" id="keysStored">
+                <i class="fas fa-check-circle"></i> API key saved successfully!
+            </div>
+            <input type="password" id="geminiApiKey" placeholder="Enter your Gemini API key">
+            <p><small>Your API key is stored locally in your browser and never sent to our servers. <a href="https://ai.google.dev/" target="_blank">Get a Gemini API key</a></small></p>
+            <div class="api-key-actions">
+                <button class="btn btn-secondary" id="cancelApiKey">Cancel</button>
+                <button class="btn btn-primary" id="saveApiKey">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggling
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const moonIcon = themeToggle.querySelector('.fa-moon');
+            
+            // Check if a dark theme preference is stored
+            const darkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (darkMode) {
+                body.classList.add('dark-mode');
+                moonIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    moonIcon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    moonIcon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+            
+            // API Key Dialog Handling
+            const apiKeyDialog = document.getElementById('apiKeyDialog');
+            const apiSettingsBtn = document.getElementById('apiSettingsBtn');
+            const saveApiKeyBtn = document.getElementById('saveApiKey');
+            const cancelApiKeyBtn = document.getElementById('cancelApiKey');
+            const geminiApiKeyInput = document.getElementById('geminiApiKey');
+            const keysStoredNotification = document.getElementById('keysStored');
+            
+            // Check if API keys are already stored
+            const storedGeminiApiKey = localStorage.getItem('geminiApiKey');
+            if (storedGeminiApiKey) {
+                geminiApiKeyInput.value = storedGeminiApiKey;
+            }
+            
+            // Open API settings dialog
+            apiSettingsBtn.addEventListener('click', function() {
+                apiKeyDialog.style.display = 'flex';
+            });
+            
+            // Close API settings dialog
+            cancelApiKeyBtn.addEventListener('click', function() {
+                apiKeyDialog.style.display = 'none';
+                keysStoredNotification.style.display = 'none';
+            });
+            
+            // Save API key
+            saveApiKeyBtn.addEventListener('click', function() {
+                const geminiApiKey = geminiApiKeyInput.value.trim();
+                
+                if (geminiApiKey) {
+                    localStorage.setItem('geminiApiKey', geminiApiKey);
+                    keysStoredNotification.style.display = 'block';
+                    
+                    // Hide notification after 3 seconds
+                    setTimeout(() => {
+                        keysStoredNotification.style.display = 'none';
+                        apiKeyDialog.style.display = 'none';
+                    }, 3000);
+                }
+            });
+            
+            // Close dialog when clicking outside
+            apiKeyDialog.addEventListener('click', function(e) {
+                if (e.target === apiKeyDialog) {
+                    apiKeyDialog.style.display = 'none';
+                    keysStoredNotification.style.display = 'none';
+                }
+            });
+            
+            // Progress tracking
+            const skills = [
+                { id: 'linear-independence', category: 'vector' },
+                { id: 'linear-combination', category: 'vector' },
+                { id: 'basis-space', category: 'vector' },
+                { id: 'inner-product', category: 'vector' },
+                { id: 'orthogonal-complement', category: 'vector' },
+                { id: 'wronskian', category: 'diff-eq' },
+                { id: 'homogeneous-linear-eq', category: 'diff-eq' },
+                { id: 'nonhomogeneous-linear-eq', category: 'diff-eq' },
+                { id: 'mechanical-vibrations', category: 'diff-eq' }
+            ];
+            
+            // Update progress display
+            function updateProgressDisplay() {
+                let vectorCompleted = 0;
+                let diffEqCompleted = 0;
+                let totalCompleted = 0;
+                
+                skills.forEach(skill => {
+                    if (localStorage.getItem(`skill-${skill.id}`) === 'completed') {
+                        totalCompleted++;
+                        if (skill.category === 'vector') {
+                            vectorCompleted++;
+                        } else if (skill.category === 'diff-eq') {
+                            diffEqCompleted++;
+                        }
+                    }
+                });
+                
+                // Update vector spaces progress
+                const vectorTotal = skills.filter(s => s.category === 'vector').length;
+                const vectorPercentage = Math.round((vectorCompleted / vectorTotal) * 100);
+                document.getElementById('vector-progress').style.width = `${vectorPercentage}%`;
+                document.querySelectorAll('.skills-count')[0].textContent = `${vectorCompleted}/${vectorTotal}`;
+                
+                // Update differential equations progress
+                const diffEqTotal = skills.filter(s => s.category === 'diff-eq').length;
+                const diffEqPercentage = Math.round((diffEqCompleted / diffEqTotal) * 100);
+                document.getElementById('diff-eq-progress').style.width = `${diffEqPercentage}%`;
+                document.querySelectorAll('.skills-count')[1].textContent = `${diffEqCompleted}/${diffEqTotal}`;
+                
+                // Update overall progress
+                const overallPercentage = Math.round((totalCompleted / skills.length) * 100);
+                document.querySelector('.progress-text').textContent = `${overallPercentage}%`;
+                document.getElementById('completed-skills').textContent = totalCompleted;
+                document.getElementById('total-skills').textContent = skills.length;
+                
+                // Update the progress circle
+                const circle = document.querySelector('.progress-circle .fg');
+                const circumference = 2 * Math.PI * 65; // 2πr where r=65
+                const offset = circumference - (overallPercentage / 100) * circumference;
+                circle.style.strokeDashoffset = offset;
+            }
+            
+            // Initialize progress display
+            updateProgressDisplay();
+        });
+    </script>
+</body>
+</html> 

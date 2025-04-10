@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH 3195 Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #16a085;
+            --light: #ecf0f1;
+            --bg: #f9f9f9;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --text: #2c3e50;
+            --border: #bdc3c7;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Header navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .header nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .header nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+        
+        .header nav a:hover,
+        .header nav a.active {
+            color: var(--primary);
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        /* API settings button */
+        .api-settings-btn {
+            padding: 6px 12px;
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .api-settings-btn:hover {
+            background-color: var(--light);
+        }
+        
+        button#theme-toggle {
+            padding: 6px 12px;
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 { 
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-description {
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            font-size: 1.2rem;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            color: var(--text);
+            flex: 1;
+            text-align: center;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background-color: var(--light);
+        }
+        
+        .tab-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Section styles */
+        section {
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Problem card styles */
+        .problem-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary);
+        }
+        
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .problem-header h3 {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .problem-difficulty {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .difficulty-easy {
+            background-color: rgba(46, 204, 113, 0.15);
+            color: #27ae60;
+        }
+        
+        .difficulty-medium {
+            background-color: rgba(243, 156, 18, 0.15);
+            color: #d35400;
+        }
+        
+        .difficulty-hard {
+            background-color: rgba(231, 76, 60, 0.15);
+            color: #c0392b;
+        }
+        
+        .problem-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .solution-toggle {
+            padding: 8px 15px;
+            background-color: var(--light);
+            color: var(--secondary);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .solution-toggle:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .solution-area {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        /* Filter controls */
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .filter-btn {
+            padding: 6px 15px;
+            background-color: var(--light);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Drawing Canvas (similar to review page) */
+        .drawing-area {
+            display: none;
+            margin-top: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .drawing-canvas {
+            cursor: crosshair;
+            touch-action: none;
+            width: 100%;
+            min-height: 300px;
+        }
+        
+        .drawing-toolbar {
+            display: flex;
+            padding: 8px;
+            background-color: var(--light);
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .toolbar-btn {
+            padding: 6px 12px;
+            background-color: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .toolbar-btn:hover {
+            background-color: var(--light);
+        }
+        
+        /* Dark mode styles */
+        body.dark-mode {
+            --primary: #5dabf0;
+            --primary-dark: #4a8ec8;
+            --secondary: #5d6d7e;
+            --accent: #25c49a;
+            --light: #465161;
+            --bg: #1e272e;
+            --text: #ecf0f1;
+            --border: #455361;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .problem-card,
+        body.dark-mode .tab-nav,
+        body.dark-mode .filter-controls,
+        body.dark-mode .header {
+            background-color: #2c3e50;
+            color: var(--text);
+        }
+        
+        body.dark-mode .tab-btn {
+            color: var(--light);
+        }
+        
+        body.dark-mode .tab-btn.active {
+            background-color: rgba(93, 173, 240, 0.1);
+        }
+        
+        body.dark-mode .solution-area {
+            background-color: rgba(93, 173, 240, 0.1);
+        }
+        
+        body.dark-mode .drawing-canvas {
+            background-color: #34495e;
+        }
+
+        /* API key dialog */
+        .api-key-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .api-key-container {
+            background-color: var(--bg);
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+        }
+        
+        .api-key-container h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .api-key-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .api-key-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* Keys stored notification */
+        .keys-stored {
+            display: none;
+            padding: 8px 12px;
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        body.dark-mode .api-key-container {
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+        
+        body.dark-mode .keys-stored {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .tab-nav {
+                flex-direction: column;
+                border-radius: 8px;
+            }
+            
+            .tab-btn {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+                text-align: left;
+            }
+            
+            .tab-btn.active {
+                border-left-color: var(--primary);
+                border-bottom-color: transparent;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
+            }
+            
+            .header nav {
+                margin-bottom: 1rem;
+            }
+            
+            .header-right {
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+            
+            .api-settings-btn {
+                margin-left: 0;
+            }
+        }
+    </style>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']], // Use \( ... \) for inline math
+        displayMath: [['\\[', '\\]']], // Use \[ ... \] for display math
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Optional: Use AMS numbering for equations
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="review.html">Review</a>
+            <a href="practice.html" class="active">Practice</a>
+        </nav>
+        <div class="header-right">
+            <button class="api-settings-btn" id="apiSettingsBtn">
+                <i class="fas fa-key"></i> API Settings
+            </button>
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-pencil-alt"></i> MATH 3195 Practice</h1>
+            <p class="header-description">Practice problems to test and strengthen your understanding of key concepts</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tab-nav" id="tab-nav">
+            <button class="tab-btn active" data-target="basic-section">
+                <i class="fas fa-angle-right"></i> Basic Problems
+            </button>
+            <button class="tab-btn" data-target="vector-section">
+                <i class="fas fa-vector-square"></i> Vector Spaces
+            </button>
+            <button class="tab-btn" data-target="diff-eq-section">
+                <i class="fas fa-superscript"></i> Differential Equations
+            </button>
+            <button class="tab-btn" data-target="comprehensive-section">
+                <i class="fas fa-graduation-cap"></i> Comprehensive
+            </button>
+        </div>
+
+        <!-- Content sections to be added later -->
+    </div>
+
+    <!-- API Key Dialog -->
+    <div class="api-key-dialog" id="apiKeyDialog">
+        <div class="api-key-container">
+            <h3>Gemini API Settings</h3>
+            <p>Enter your Gemini API key to enable AI-powered handwriting recognition and solution checking.</p>
+            <div class="keys-stored" id="keysStored">
+                <i class="fas fa-check-circle"></i> API key saved successfully!
+            </div>
+            <input type="password" id="geminiApiKey" placeholder="Enter your Gemini API key">
+            <p><small>Your API key is stored locally in your browser and never sent to our servers. <a href="https://ai.google.dev/" target="_blank">Get a Gemini API key</a></small></p>
+            <div class="api-key-actions">
+                <button class="btn btn-secondary" id="cancelApiKey">Cancel</button>
+                <button class="btn btn-primary" id="saveApiKey">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggling
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const moonIcon = themeToggle.querySelector('.fa-moon');
+            
+            // Check if a dark theme preference is stored
+            const darkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (darkMode) {
+                body.classList.add('dark-mode');
+                moonIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    moonIcon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    moonIcon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+            
+            // API Key Dialog Handling
+            const apiKeyDialog = document.getElementById('apiKeyDialog');
+            const apiSettingsBtn = document.getElementById('apiSettingsBtn');
+            const saveApiKeyBtn = document.getElementById('saveApiKey');
+            const cancelApiKeyBtn = document.getElementById('cancelApiKey');
+            const geminiApiKeyInput = document.getElementById('geminiApiKey');
+            const keysStoredNotification = document.getElementById('keysStored');
+            
+            // Check if API keys are already stored
+            const storedGeminiApiKey = localStorage.getItem('geminiApiKey');
+            if (storedGeminiApiKey) {
+                geminiApiKeyInput.value = storedGeminiApiKey;
+            }
+            
+            // Open API settings dialog
+            apiSettingsBtn.addEventListener('click', function() {
+                apiKeyDialog.style.display = 'flex';
+            });
+            
+            // Close API settings dialog
+            cancelApiKeyBtn.addEventListener('click', function() {
+                apiKeyDialog.style.display = 'none';
+                keysStoredNotification.style.display = 'none';
+            });
+            
+            // Save API key
+            saveApiKeyBtn.addEventListener('click', function() {
+                const geminiApiKey = geminiApiKeyInput.value.trim();
+                
+                if (geminiApiKey) {
+                    localStorage.setItem('geminiApiKey', geminiApiKey);
+                    keysStoredNotification.style.display = 'block';
+                    
+                    // Hide notification after 3 seconds
+                    setTimeout(() => {
+                        keysStoredNotification.style.display = 'none';
+                        apiKeyDialog.style.display = 'none';
+                    }, 3000);
+                }
+            });
+            
+            // Close dialog when clicking outside
+            apiKeyDialog.addEventListener('click', function(e) {
+                if (e.target === apiKeyDialog) {
+                    apiKeyDialog.style.display = 'none';
+                    keysStoredNotification.style.display = 'none';
+                }
+            });
+            
+            // Tab navigation
+            const tabs = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all sections
+                    document.querySelectorAll('section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the target section
+                    const targetId = this.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                });
+            });
+            
+            // Check URL hash on page load
+            function checkHash() {
+                const hash = window.location.hash.substring(1); // Remove the # symbol
+                if (hash) {
+                    const targetBtn = document.querySelector(`.tab-btn[data-target="${hash}-section"]`);
+                    if (targetBtn) {
+                        targetBtn.click();
+                    }
+                }
+            }
+            
+            // Check hash on load and when it changes
+            window.addEventListener('hashchange', checkHash);
+            checkHash();
+        });
+    </script>
+</body>
+</html>

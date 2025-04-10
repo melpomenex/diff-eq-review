@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Math 3195 Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #16a085;
+            --light: #ecf0f1;
+            --bg: #f9f9f9;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --text: #2c3e50;
+            --border: #bdc3c7;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        /* Header navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .header nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .header nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+        
+        .header nav a:hover,
+        .header nav a.active {
+            color: var(--primary);
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        h1 { 
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-description {
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            font-size: 1.2rem;
+        }
+        
+        nav {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .topic-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .topic-btn {
+            background-color: var(--light);
+            color: var(--secondary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        
+        .topic-btn:hover, .topic-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        h2 { 
+            color: var(--primary-dark); 
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 10px;
+            margin: 2rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 10px;
+        }
+        
+        details { 
+            border: 1px solid var(--border); 
+            border-radius: 15px; 
+            margin-bottom: 1.5rem; 
+            background-color: white;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        details:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        summary { 
+            cursor: pointer; 
+            padding: 1.2rem; 
+            background-color: white;
+            border-radius: 15px;
+            font-weight: bold; 
+            color: var(--secondary);
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        summary:hover { 
+            background-color: var(--light);
+        }
+        
+        summary::after {
+            content: "\f078";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+        
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+        
+        .content { 
+            padding: 1.5rem; 
+            border-top: 1px solid var(--border);
+        }
+        
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .section-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .card-header i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .how-to, .definitions, .practice, .videos, .knowledge-check, .interactive, .explanation { 
+            margin-top: 1rem; 
+        }
+        
+        ul, ol { 
+            margin-left: 20px; 
+        }
+
+        .video-container {
+            position: relative;
+            margin: 1.5rem 0;
+        }
+        
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .video-embed iframe, 
+        .video-embed video { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .video-btn {
+            padding: 8px 15px;
+            background-color: var(--light);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .video-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .knowledge-check { 
+            background-color: #e8f6f3; 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            border: 1px solid #a2d9ce;
+            margin-top: 2rem;
+        }
+        
+        .practice-problem {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .problem-statement {
+            margin-bottom: 1rem;
+        }
+        
+        .problem-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .solution, .hint {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .solution {
+            background-color: #e8f8f5;
+            border: 1px solid #a2d9ce;
+        }
+        
+        .hint {
+            background-color: #fef9e7;
+            border: 1px solid #f9e79f;
+        }
+        
+        .citation { 
+            font-size: 0.85rem; 
+            color: #7f8c8d; 
+            display: block; 
+            margin-top: 10px; 
+        }
+        
+        /* Progress indicators */
+        .progress-container {
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        /* Style adjustments for MathJax */
+        mjx-container { 
+            display: inline-block !important; 
+        }
+        
+        /* Tooltip for formula explanations */
+        .formula-tip {
+            border-bottom: 1px dotted var(--primary);
+            position: relative;
+            cursor: help;
+        }
+        
+        .formula-tip:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+        
+        /* Dark mode */
+        body.dark-mode {
+            --primary: #5dabf0;
+            --primary-dark: #4a8ec8;
+            --secondary: #5d6d7e;
+            --accent: #25c49a;
+            --light: #465161;
+            --bg: #1e272e;
+            --text: #ecf0f1;
+            --border: #455361;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode header {
+            background: linear-gradient(135deg, #304156, #3c5978);
+        }
+        
+        body.dark-mode .card,
+        body.dark-mode details,
+        body.dark-mode summary,
+        body.dark-mode nav {
+            background-color: #2c3e50;
+            color: var(--text);
+        }
+        
+        body.dark-mode summary:hover {
+            background-color: #364c63;
+        }
+        
+        body.dark-mode .video-btn,
+        body.dark-mode .topic-btn,
+        body.dark-mode .btn-secondary {
+            background-color: #455361;
+            color: #ecf0f1;
+        }
+        
+        body.dark-mode .practice-problem {
+            background-color: #2c3e50;
+        }
+        
+        body.dark-mode .solution {
+            background-color: #1a3b32;
+            border-color: #25a77d;
+        }
+        
+        body.dark-mode .hint {
+            background-color: #453a11;
+            border-color: #c7b44a;
+        }
+        
+        body.dark-mode .knowledge-check {
+            background-color: #1a3b32;
+            border-color: #25a77d;
+        }
+        
+        /* Drawing Canvas for Handwritten Solutions */
+        .drawing-area {
+            display: none;
+            margin-top: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .drawing-canvas {
+            cursor: crosshair;
+            touch-action: none;
+            width: 100%;
+            min-height: 300px;
+        }
+        
+        .drawing-toolbar {
+            display: flex;
+            padding: 8px;
+            background-color: var(--light);
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .toolbar-btn {
+            padding: 6px 12px;
+            background-color: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .toolbar-btn:hover {
+            background-color: var(--light);
+        }
+        
+        .color-picker {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        
+        .stroke-width {
+            width: 80px;
+        }
+        
+        /* Feedback display */
+        .feedback-message {
+            margin-top: 0.5rem;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .feedback-correct {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 1px solid var(--success);
+            color: #27ae60;
+        }
+        
+        .feedback-incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--danger);
+            color: #c0392b;
+        }
+        
+        .feedback-partial {
+            background-color: rgba(243, 156, 18, 0.2);
+            border: 1px solid var(--warning);
+            color: #d35400;
+        }
+        
+        /* Mobile responsiveness for drawing */
+        @media (max-width: 767px) {
+            .drawing-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .toolbar-btn {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        body.dark-mode .drawing-canvas {
+            background-color: #2c3e50;
+            border-color: var(--border);
+        }
+        
+        body.dark-mode .drawing-toolbar {
+            background-color: #465161;
+        }
+        
+        body.dark-mode .toolbar-btn {
+            background-color: #5d6d7e;
+            color: var(--text);
+            border-color: #455361;
+        }
+        
+        body.dark-mode .toolbar-btn:hover {
+            background-color: #364c63;
+        }
+        
+        /* Loading animation */
+        .loading-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--light);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* API key dialog */
+        .api-key-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .api-key-container {
+            background-color: var(--bg);
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+        }
+        
+        .api-key-container h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .api-key-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .api-key-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        body.dark-mode .api-key-container {
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+        
+        /* Keys stored notification */
+        .keys-stored {
+            display: none;
+            padding: 8px 12px;
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        body.dark-mode .keys-stored {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+        }
+        
+        /* API settings button */
+        .api-settings-btn {
+            padding: 6px 12px;
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .api-settings-btn:hover {
+            background-color: var(--light);
+        }
+        
+        body.dark-mode .api-settings-btn {
+            color: var(--light);
+            border-color: #455361;
+        }
+        
+        body.dark-mode .api-settings-btn:hover {
+            background-color: #364c63;
+        }
+        
+        /* Loading animation */
+        .loading-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--light);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']], // Use \( ... \) for inline math
+        displayMath: [['\\[', '\\]']], // Use \[ ... \] for display math
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Optional: Use AMS numbering for equations
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    <!-- Google Gemini API -->
+    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@latest"></script>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="review.html" class="active">Review</a>
+            <a href="practice.html">Practice</a>
+        </nav>
+        <div class="header-right">
+            <button class="api-settings-btn" id="apiSettingsBtn">
+                <i class="fas fa-key"></i> API Settings
+            </button>
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-square-root-alt"></i> MATH 3195 Interactive Review</h1>
+            <p class="header-description">A comprehensive, interactive study guide to master Linear Algebra and Differential Equations concepts for Exam 2</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <div class="topic-nav">
+                <button class="topic-btn active" data-target="vector-spaces">Vector Spaces</button>
+                <button class="topic-btn" data-target="diff-equations">Differential Equations</button>
+                <button class="topic-btn" data-target="practice-all">Practice All</button>
+                <button class="topic-btn" data-target="progress">My Progress</button>
+            </div>
+        </nav>
+
+        <section id="progress-section" style="display: none;">
+            <h2><i class="fas fa-chart-line"></i> Your Learning Progress</h2>
+            <div class="progress-container">
+                <h3>Overall Progress:</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overall-progress"></div>
+                </div>
+                <p id="progress-status">0% Complete</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h3>Progress Tracker</h3>
+                </div>
+                <div id="progress-checklist">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="vector-spaces-section">
+            <h2><i class="fas fa-vector-square"></i> Vector Spaces (Chapters 4 & 5)</h2>
+
+            <details>
+                <summary>Skill: Determine Linear Independence/Dependence</summary>
+                <div class="content">
+                    <div class="section-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h4>Key Concept</h4>
+                            </div>
+                            <p>A set of vectors \( \{v_1, v_2, ..., v_k\} \) is <strong>linearly independent</strong> if the only solution to \( c_1v_1 + c_2v_2 + ... + c_kv_k = \vec{0} \) is the trivial solution where all \( c_i = 0 \).</p>
+                            <p>If there exists a non-trivial solution (at least one coefficient \( c_i \neq 0 \)), then the vectors are <strong>linearly dependent</strong>.</p>
+                        </div>
+
+                        <div class="how-to card">
+                            <div class="card-header">
+                                <i class="fas fa-tasks"></i>
+                                <h4>How To Solve</h4>
+                            </div>
+                            <ol>
+                                <li><strong>Set up the Equation:</strong> Form \( c_1v_1 + c_2v_2 + ... + c_kv_k = \vec{0} \).</li>
+                                <li><strong>Create Matrix:</strong> Form augmented matrix \( [v_1 | v_2 | ... | v_k | \vec{0}] \).</li>
+                                <li><strong>Row Reduce:</strong> Find the reduced row echelon form.</li>
+                                <li><strong>Analyze Solution:</strong>
+                                    <ul>
+                                        <li><strong>Linearly Independent:</strong> Only trivial solution (no free variables).</li>
+                                        <li><strong>Linearly Dependent:</strong> Non-trivial solutions exist (has free variables).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Alternative Method:</strong> For n vectors in \( \mathbb{R}^n \), calculate determinant of matrix with vectors as columns. If \( \det(A) \neq 0 \), vectors are linearly independent.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="videos">
+                        <h4><i class="fas fa-video"></i> Video Resources</h4>
+                        <div class="video-selector">
+                            <button class="video-btn active" data-video="video1">Video 1: Core Concepts</button>
+                            <button class="video-btn" data-video="video2">Video 2: Step-by-Step Example</button>
+                        </div>
+                        <div class="video-container">
+                            <div id="video1" class="video-embed active">
+                                <iframe src="https://www.youtube.com/embed/rUJ5B-swc9Y?si=SG_v6AJOlJA5I7Pb" title="Linear Independence" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div id="video2" class="video-embed" style="display: none;">
+                                <iframe src="https://www.youtube.com/embed/ivP-6oicIWU?si=O4d_fTEx6aNy-z0t" title="Linear Independence, Basis, Dimension, and Span" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive">
+                        <h4><i class="fas fa-pencil-alt"></i> Practice Problem</h4>
+                        <div class="practice-problem">
+                            <div class="problem-statement">
+                                <p>Determine if the following vectors are linearly independent or dependent:</p>
+                                <p>\[v_1 = \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}, v_2 = \begin{pmatrix} 3 \\ 1 \\ 0 \end{pmatrix}, v_3 = \begin{pmatrix} 7 \\ 5 \\ 1 \end{pmatrix}\]</p>
+                            </div>
+                            <div class="problem-controls">
+                                <button class="btn btn-secondary hint-btn" data-target="hint1">Show Hint</button>
+                                <button class="btn btn-primary solution-btn" data-target="solution1">Show Solution</button>
+                                <button class="btn btn-secondary write-solution-btn" data-problem="linear-independence-1">Write Solution</button>
+                                <button class="btn btn-secondary" id="mark-completed-btn" data-skill="linear-independence">Mark as Completed</button>
+                            </div>
+                            <div id="hint1" class="hint">
+                                <p>Start by setting up the vector equation \( c_1v_1 + c_2v_2 + c_3v_3 = \vec{0} \) and creating the augmented matrix \( [v_1 | v_2 | v_3 | \vec{0}] \). Then perform row reduction.</p>
+                            </div>
+                            <div id="solution1" class="solution">
+                                <h5>Solution:</h5>
+                                <p>We need to determine if there are non-trivial solutions to \( c_1v_1 + c_2v_2 + c_3v_3 = \vec{0} \).</p>
+                                <p>Form the augmented matrix:</p>
+                                <p>\[\begin{pmatrix}
+                                1 & 3 & 7 & 0 \\
+                                2 & 1 & 5 & 0 \\
+                                1 & 0 & 1 & 0
+                                \end{pmatrix}\]</p>
+                                <p>Row reduce to get:</p>
+                                <p>\[\begin{pmatrix}
+                                1 & 0 & 2 & 0 \\
+                                0 & 1 & 5/3 & 0 \\
+                                0 & 0 & 0 & 0
+                                \end{pmatrix}\]</p>
+                                <p>Since we have a free variable (\(c_3\)), there are infinitely many non-trivial solutions. Therefore, the vectors are <strong>linearly dependent</strong>.</p>
+                                <p>We can write \(v_3\) as a linear combination of \(v_1\) and \(v_2\): \(v_3 = 2v_1 + \frac{5}{3}v_2\)</p>
+                            </div>
+                            <div id="drawing-linear-independence-1" class="drawing-area">
+                                <canvas class="drawing-canvas"></canvas>
+                                <div class="drawing-toolbar">
+                                    <button class="toolbar-btn clear-btn"><i class="fas fa-trash"></i> Clear</button>
+                                    <button class="toolbar-btn undo-btn"><i class="fas fa-undo"></i> Undo</button>
+                                    <input type="color" class="color-picker" value="#000000">
+                                    <input type="range" class="stroke-width" min="1" max="10" value="2">
+                                    <button class="toolbar-btn check-solution-btn" data-problem="linear-independence-1"><i class="fas fa-check"></i> Check Solution</button>
+                                </div>
+                                <div class="loading-spinner" id="loading-linear-independence-1"></div>
+                                <div class="feedback-message" id="feedback-linear-independence-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Skill: Write Vector as Linear Combination / Check Span</summary>
+                <div class="content">
+                    <div class="section-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h4>Key Concept</h4>
+                            </div>
+                            <p>The <strong>span</strong> of vectors \( \{v_1, v_2, ..., v_k\} \) is the set of all possible linear combinations of these vectors.</p>
+                            <p>To write vector \( b \) as a linear combination or check if it's in the span, we solve the system \( c_1v_1 + c_2v_2 + ... + c_kv_k = b \).</p>
+                        </div>
+
+                        <div class="how-to card">
+                            <div class="card-header">
+                                <i class="fas fa-tasks"></i>
+                                <h4>How To Solve</h4>
+                            </div>
+                            <ol>
+                                <li><strong>Set up the Equation:</strong> Form \( c_1v_1 + c_2v_2 + ... + c_kv_k = b \).</li>
+                                <li><strong>Create Matrix:</strong> Form augmented matrix \( [v_1 | v_2 | ... | v_k | b] \).</li>
+                                <li><strong>Row Reduce:</strong> Find the reduced row echelon form.</li>
+                                <li><strong>Analyze Solution:</strong>
+                                    <ul>
+                                        <li><strong>Consistent System:</strong> \(b\) is in the span; use solution to find coefficients.</li>
+                                        <li><strong>Inconsistent System:</strong> \(b\) is not in the span (e.g., row like \([0 \; 0 \; ... \; 0 \; | \; d]\) where \(d \neq 0\)).</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="interactive">
+                        <h4><i class="fas fa-pencil-alt"></i> Practice Problem</h4>
+                        <div class="practice-problem">
+                            <div class="problem-statement">
+                                <p>Determine if \( b = \begin{pmatrix} 2 \\ 5 \\ 3 \end{pmatrix} \) is in the span of the vectors:</p>
+                                <p>\[v_1 = \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}, v_2 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}\]</p>
+                                <p>If it is, express \(b\) as a linear combination of \(v_1\) and \(v_2\).</p>
+                            </div>
+                            <div class="problem-controls">
+                                <button class="btn btn-secondary hint-btn" data-target="hint2">Show Hint</button>
+                                <button class="btn btn-primary solution-btn" data-target="solution2">Show Solution</button>
+                                <button class="btn btn-secondary write-solution-btn" data-problem="linear-combination-1">Write Solution</button>
+                                <button class="btn btn-secondary" data-skill="linear-combination">Mark as Completed</button>
+                            </div>
+                            <div id="hint2" class="hint">
+                                <p>Set up the equation \( c_1v_1 + c_2v_2 = b \) and create the augmented matrix \( [v_1 | v_2 | b] \). Then solve the system using row reduction.</p>
+                            </div>
+                            <div id="solution2" class="solution">
+                                <h5>Solution:</h5>
+                                <p>We need to find coefficients \(c_1\) and \(c_2\) such that \(c_1v_1 + c_2v_2 = b\), or determine that no such coefficients exist.</p>
+                                <p>Form the augmented matrix:</p>
+                                <p>\[\begin{pmatrix}
+                                1 & 0 & 2 \\
+                                2 & 1 & 5 \\
+                                0 & 1 & 3
+                                \end{pmatrix}\]</p>
+                                <p>Row reduce to get:</p>
+                                <p>\[\begin{pmatrix}
+                                1 & 0 & 2 \\
+                                0 & 1 & 1 \\
+                                0 & 0 & 2
+                                \end{pmatrix}\]</p>
+                                <p>The last row indicates \(0 = 2\), which is a contradiction. Therefore, the system is inconsistent.</p>
+                                <p>Thus, \(b\) is <strong>not</strong> in the span of \(v_1\) and \(v_2\).</p>
+                            </div>
+                            <div id="drawing-linear-combination-1" class="drawing-area">
+                                <canvas class="drawing-canvas"></canvas>
+                                <div class="drawing-toolbar">
+                                    <button class="toolbar-btn clear-btn"><i class="fas fa-trash"></i> Clear</button>
+                                    <button class="toolbar-btn undo-btn"><i class="fas fa-undo"></i> Undo</button>
+                                    <input type="color" class="color-picker" value="#000000">
+                                    <input type="range" class="stroke-width" min="1" max="10" value="2">
+                                    <button class="toolbar-btn check-solution-btn" data-problem="linear-combination-1"><i class="fas fa-check"></i> Check Solution</button>
+                                </div>
+                                <div class="loading-spinner" id="loading-linear-combination-1"></div>
+                                <div class="feedback-message" id="feedback-linear-combination-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Skill: Find Basis for Row/Column/Null Space & Rank</summary>
+                <div class="content">
+                    <div class="section-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h4>Key Concept</h4>
+                            </div>
+                            <p>Given a matrix \(A\), we can find bases for its fundamental spaces:</p>
+                            <ul>
+                                <li><strong>Row Space:</strong> The span of the rows of \(A\).</li>
+                                <li><strong>Column Space:</strong> The span of the columns of \(A\).</li>
+                                <li><strong>Null Space:</strong> All vectors \(x\) such that \(Ax = \vec{0}\).</li>
+                            </ul>
+                            <p>The <strong>rank</strong> of a matrix is the dimension of its row space or column space (they're the same).</p>
+                        </div>
+
+                        <div class="how-to card">
+                            <div class="card-header">
+                                <i class="fas fa-tasks"></i>
+                                <h4>How To Find Bases</h4>
+                            </div>
+                            <ol>
+                                <li><strong>Row Reduce:</strong> Transform matrix \(A\) to its Reduced Row Echelon Form (RREF) \(E\).</li>
+                                <li><strong>Row Space Basis:</strong> The non-zero rows of \(E\) form a basis for the row space of \(A\).</li>
+                                <li><strong>Column Space Basis:</strong> Identify columns of \(E\) containing pivots. The corresponding columns in the <em>original</em> matrix \(A\) form a basis for the column space.</li>
+                                <li><strong>Null Space Basis:</strong> Solve \(Ax = \vec{0}\) using the RREF \(E\). Express basic variables in terms of free variables. The coefficient vectors of free variables form a basis for the null space.</li>
+                                <li><strong>Rank:</strong> Count the number of pivots in \(E\) (equals number of non-zero rows).</li>
+                                <li><strong>Nullity:</strong> Number of columns minus rank (equals number of free variables).</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="videos">
+                        <h4><i class="fas fa-video"></i> Video Resources</h4>
+                        <div class="video-container">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/AVWTlNkTNfw" title="Column Space and Nullspace (Gilbert Strang)" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive">
+                        <h4><i class="fas fa-pencil-alt"></i> Practice Problem</h4>
+                        <div class="practice-problem">
+                            <div class="problem-statement">
+                                <p>Find a basis for the row space, column space, and null space of the matrix:</p>
+                                <p>\[A = \begin{pmatrix}
+                                1 & 2 & 3 & 4 \\
+                                2 & 4 & 6 & 8 \\
+                                3 & 5 & 7 & 9
+                                \end{pmatrix}\]</p>
+                                <p>Also determine the rank and nullity of \(A\).</p>
+                            </div>
+                            <div class="problem-controls">
+                                <button class="btn btn-secondary hint-btn" data-target="hint3">Show Hint</button>
+                                <button class="btn btn-primary solution-btn" data-target="solution3">Show Solution</button>
+                                <button class="btn btn-secondary write-solution-btn" data-problem="basis-space-1">Write Solution</button>
+                                <button class="btn btn-secondary" data-skill="basis-space">Mark as Completed</button>
+                            </div>
+                            <div id="hint3" class="hint">
+                                <p>Find the RREF of \(A\) first. Then identify the non-zero rows for the row space, the pivot columns in the original matrix for the column space, and solve \(Ax = \vec{0}\) for the null space.</p>
+                            </div>
+                            <div id="solution3" class="solution">
+                                <h5>Solution:</h5>
+                                <p>Step 1: Calculate the RREF of \(A\).</p>
+                                <p>\[\begin{pmatrix}
+                                1 & 2 & 3 & 4 \\
+                                2 & 4 & 6 & 8 \\
+                                3 & 5 & 7 & 9
+                                \end{pmatrix} \xrightarrow{\text{RREF}} \begin{pmatrix}
+                                1 & 0 & -1 & -2 \\
+                                0 & 1 & 2 & 3 \\
+                                0 & 0 & 0 & 0
+                                \end{pmatrix}\]</p>
+                                
+                                <p><strong>Row Space Basis:</strong> The non-zero rows of RREF form a basis:</p>
+                                <p>\[\left\{\begin{pmatrix} 1 & 0 & -1 & -2 \end{pmatrix}, \begin{pmatrix} 0 & 1 & 2 & 3 \end{pmatrix}\right\}\]</p>
+                                
+                                <p><strong>Column Space Basis:</strong> The pivot columns in \(A\) form a basis. The pivots are in columns 1 and 2, so:</p>
+                                <p>\[\left\{\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}, \begin{pmatrix} 2 \\ 4 \\ 5 \end{pmatrix}\right\}\]</p>
+                                
+                                <p><strong>Null Space Basis:</strong> From the RREF, we can see that columns 3 and 4 correspond to free variables. Write the system:</p>
+                                <p>\[x_1 - x_3 - 2x_4 = 0\]</p>
+                                <p>\[x_2 + 2x_3 + 3x_4 = 0\]</p>
+                                
+                                <p>Let \(x_3 = s\) and \(x_4 = t\), then \(x_1 = s + 2t\) and \(x_2 = -2s - 3t\).</p>
+                                <p>The general solution is:</p>
+                                <p>\[\vec{x} = s\begin{pmatrix} 1 \\ -2 \\ 1 \\ 0 \end{pmatrix} + t\begin{pmatrix} 2 \\ -3 \\ 0 \\ 1 \end{pmatrix}\]</p>
+                                
+                                <p>So a basis for the null space is:</p>
+                                <p>\[\left\{\begin{pmatrix} 1 \\ -2 \\ 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 2 \\ -3 \\ 0 \\ 1 \end{pmatrix}\right\}\]</p>
+                                
+                                <p><strong>Rank:</strong> There are 2 pivots, so \(\text{rank}(A) = 2\).</p>
+                                <p><strong>Nullity:</strong> Number of columns minus rank: \(4 - 2 = 2\).</p>
+                            </div>
+                            <div id="drawing-basis-space-1" class="drawing-area" style="display: none;">
+                                <canvas class="drawing-canvas"></canvas>
+                                <div class="drawing-toolbar">
+                                    <button class="toolbar-btn clear-btn"><i class="fas fa-trash"></i> Clear</button>
+                                    <button class="toolbar-btn undo-btn"><i class="fas fa-undo"></i> Undo</button>
+                                    <input type="color" class="color-picker" value="#000000">
+                                    <input type="range" class="stroke-width" min="1" max="10" value="2">
+                                    <button class="toolbar-btn check-solution-btn" data-problem="basis-space-1"><i class="fas fa-check"></i> Check Solution</button>
+                                </div>
+                                <div class="loading-spinner" id="loading-basis-space-1"></div>
+                                <div class="feedback-message" id="feedback-basis-space-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Skill: Inner Product, Length, Distance, Angle, Orthogonality</summary>
+                <div class="content">
+                    <div class="section-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h4>Key Concept</h4>
+                            </div>
+                            <p>The <strong>inner product</strong> (dot product) of vectors is a fundamental operation that allows us to calculate lengths, distances, angles, and determine orthogonality.</p>
+                            <p>Two vectors are <strong>orthogonal</strong> if their inner product is zero.</p>
+                        </div>
+
+                        <div class="how-to card">
+                            <div class="card-header">
+                                <i class="fas fa-tasks"></i>
+                                <h4>Formulas</h4>
+                            </div>
+                            <p>For vectors \( u = (u_1, ..., u_n) \) and \( v = (v_1, ..., v_n) \) in \( \mathbb{R}^n \):</p>
+                            <ul>
+                                <li><strong>Inner Product:</strong> \( u \cdot v = u_1v_1 + u_2v_2 + ... + u_nv_n \)</li>
+                                <li><strong>Length (Norm):</strong> \( \|u\| = \sqrt{u \cdot u} = \sqrt{u_1^2 + u_2^2 + ... + u_n^2} \)</li>
+                                <li><strong>Distance:</strong> \( d(u, v) = \|u - v\| = \sqrt{(u_1-v_1)^2 + ... + (u_n-v_n)^2} \)</li>
+                                <li><strong>Angle:</strong> \( \cos \theta = \frac{u \cdot v}{\|u\| \|v\|} \) (where \( 0 \leq \theta \leq \pi \))</li>
+                                <li><strong>Orthogonality:</strong> \( u \) and \( v \) are orthogonal if \( u \cdot v = 0 \)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="videos">
+                        <h4><i class="fas fa-video"></i> Video Resources</h4>
+                        <div class="video-selector">
+                            <button class="video-btn active" data-video="ip-video1">Video 1: Inner Product Basics</button>
+                            <button class="video-btn" data-video="ip-video2">Video 2: Orthogonality</button>
+                        </div>
+                        <div class="video-container">
+                            <div id="ip-video1" class="video-embed active">
+                                <iframe src="https://www.youtube.com/embed/C2iKgnGby0I" title="Inner Product, Vector Length and Distance" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div id="ip-video2" class="video-embed" style="display: none;">
+                                <iframe src="https://www.youtube.com/embed/HS6aGeq3Fds" title="Inner Product Introduction" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive">
+                        <h4><i class="fas fa-pencil-alt"></i> Practice Problem</h4>
+                        <div class="practice-problem">
+                            <div class="problem-statement">
+                                <p>Given vectors \( u = (3, -1, 4) \) and \( v = (2, 5, 1) \):</p>
+                                <ol type="a">
+                                    <li>Calculate the inner product \( u \cdot v \).</li>
+                                    <li>Find the lengths \( \|u\| \) and \( \|v\| \).</li>
+                                    <li>Calculate the distance \( d(u, v) \).</li>
+                                    <li>Find the angle \( \theta \) between \( u \) and \( v \) (in radians).</li>
+                                    <li>Determine if \( u \) and \( v \) are orthogonal.</li>
+                                </ol>
+                            </div>
+                            <div class="problem-controls">
+                                <button class="btn btn-secondary hint-btn" data-target="hint4">Show Hint</button>
+                                <button class="btn btn-primary solution-btn" data-target="solution4">Show Solution</button>
+                                <button class="btn btn-secondary write-solution-btn" data-problem="inner-product-1">Write Solution</button>
+                                <button class="btn btn-secondary" data-skill="inner-product">Mark as Completed</button>
+                            </div>
+                            <div id="hint4" class="hint">
+                                <p>Use the formulas from the "Formulas" card. For the inner product, multiply corresponding components and sum them. For lengths, take the square root of the sum of squares.</p>
+                            </div>
+                            <div id="solution4" class="solution">
+                                <h5>Solution:</h5>
+                                <ol type="a">
+                                    <li><strong>Inner Product:</strong><br>
+                                    \( u \cdot v = (3)(2) + (-1)(5) + (4)(1) = 6 - 5 + 4 = 5 \)</li>
+                                    
+                                    <li><strong>Lengths:</strong><br>
+                                    \( \|u\| = \sqrt{3^2 + (-1)^2 + 4^2} = \sqrt{9 + 1 + 16} = \sqrt{26} \approx 5.10 \)<br>
+                                    \( \|v\| = \sqrt{2^2 + 5^2 + 1^2} = \sqrt{4 + 25 + 1} = \sqrt{30} \approx 5.48 \)</li>
+                                    
+                                    <li><strong>Distance:</strong><br>
+                                    \( d(u, v) = \|u - v\| = \|(3-2, -1-5, 4-1)\| \)<br>
+                                    \( = \sqrt{1^2 + (-6)^2 + 3^2} = \sqrt{1 + 36 + 9} = \sqrt{46} \approx 6.78 \)</li>
+                                    
+                                    <li><strong>Angle:</strong><br>
+                                    \( \cos \theta = \frac{u \cdot v}{\|u\| \|v\|} = \frac{5}{\sqrt{26} \cdot \sqrt{30}} = \frac{5}{\sqrt{780}} \approx 0.179 \)<br>
+                                    \( \theta = \arccos(0.179) \approx 1.39 \) radians or about \( 79.7^\circ \)</li>
+                                    
+                                    <li><strong>Orthogonality:</strong><br>
+                                    Since \( u \cdot v = 5 \neq 0 \), the vectors are <strong>not orthogonal</strong>.</li>
+                                </ol>
+                            </div>
+                            <div id="drawing-inner-product-1" class="drawing-area" style="display: none;">
+                                <canvas class="drawing-canvas"></canvas>
+                                <div class="drawing-toolbar">
+                                    <button class="toolbar-btn clear-btn"><i class="fas fa-trash"></i> Clear</button>
+                                    <button class="toolbar-btn undo-btn"><i class="fas fa-undo"></i> Undo</button>
+                                    <input type="color" class="color-picker" value="#000000">
+                                    <input type="range" class="stroke-width" min="1" max="10" value="2">
+                                    <button class="toolbar-btn check-solution-btn" data-problem="inner-product-1"><i class="fas fa-check"></i> Check Solution</button>
+                                </div>
+                                <div class="loading-spinner" id="loading-inner-product-1"></div>
+                                <div class="feedback-message" id="feedback-inner-product-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Skill: Orthogonal Complement</summary>
+                <div class="content">
+                    <div class="section-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h4>Key Concept</h4>
+                            </div>
+                            <p>The <strong>orthogonal complement</strong> of a subspace \( V \) of \( \mathbb{R}^n \), denoted \( V^{\perp} \), is the set of all vectors that are orthogonal to every vector in \( V \).</p>
+                            <p>Mathematically: \( V^{\perp} = \{x \in \mathbb{R}^n : x \cdot v = 0 \text{ for all } v \in V\} \)</p>
+                            <p>Key properties:</p>
+                            <ul>
+                                <li>\( \dim(V) + \dim(V^{\perp}) = n \)</li>
+                                <li>\( (V^{\perp})^{\perp} = V \)</li>
+                                <li>The orthogonal complement of the row space of a matrix is its null space, and vice versa.</li>
+                            </ul>
+                        </div>
+
+                        <div class="how-to card">
+                            <div class="card-header">
+                                <i class="fas fa-tasks"></i>
+                                <h4>How To Find Orthogonal Complement</h4>
+                            </div>
+                            <ol>
+                                <li><strong>Form Matrix:</strong> If \( V = \text{span}\{v_1, ..., v_k\} \), create matrix \( A \) with these vectors as rows.</li>
+                                <li><strong>Find Null Space:</strong> \( V^{\perp} \) is the null space of \( A \). Solve \( Ax = \vec{0} \).</li>
+                                <li><strong>Express Basis:</strong> The basis for \( V^{\perp} \) is the basis for the null space of \( A \).</li>
+                            </ol>
+                            <p>Alternatively, if \( V \) is the row space of a matrix \( M \), then \( V^{\perp} \) is the null space of \( M \).</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive">
+                        <h4><i class="fas fa-pencil-alt"></i> Practice Problem</h4>
+                        <div class="practice-problem">
+                            <div class="problem-statement">
+                                <p>Find a basis for the orthogonal complement of the subspace \( V \) of \( \mathbb{R}^4 \) spanned by the vectors:</p>
+                                <p>\[ v_1 = (1, 2, 0, 3) \text{ and } v_2 = (2, 1, 1, 0) \]</p>
+                            </div>
+                            <div class="problem-controls">
+                                <button class="btn btn-secondary hint-btn" data-target="hint5">Show Hint</button>
+                                <button class="btn btn-primary solution-btn" data-target="solution5">Show Solution</button>
+                                <button class="btn btn-secondary write-solution-btn" data-problem="orthogonal-complement-1">Write Solution</button>
+                                <button class="btn btn-secondary" data-skill="orthogonal-complement">Mark as Completed</button>
+                            </div>
+                            <div id="hint5" class="hint">
+                                <p>Form a matrix \( A \) with rows \( v_1 \) and \( v_2 \). Then find a basis for the null space of \( A \) by solving \( Ax = \vec{0} \).</p>
+                            </div>
+                            <div id="solution5" class="solution">
+                                <h5>Solution:</h5>
+                                <p>Step 1: Form the matrix \( A \) with rows \( v_1 \) and \( v_2 \).</p>
+                                <p>\[ A = \begin{pmatrix}
+                                1 & 2 & 0 & 3 \\
+                                2 & 1 & 1 & 0
+                                \end{pmatrix} \]</p>
+                                
+                                <p>Step 2: Find the RREF of \( A \).</p>
+                                <p>\[ \begin{pmatrix}
+                                1 & 2 & 0 & 3 \\
+                                2 & 1 & 1 & 0
+                                \end{pmatrix} \xrightarrow{\text{RREF}} \begin{pmatrix}
+                                1 & 0 & \frac{1}{3} & 0 \\
+                                0 & 1 & -\frac{1}{6} & \frac{3}{2}
+                                \end{pmatrix} \]</p>
+                                
+                                <p>Step 3: Identify the basic and free variables. Columns 1 and 2 contain pivots, so \( x_1 \) and \( x_2 \) are basic variables. Columns 3 and 4 do not have pivots, so \( x_3 \) and \( x_4 \) are free variables.</p>
+                                
+                                <p>Step 4: Express the basic variables in terms of the free variables.</p>
+                                <p>\[ x_1 = -\frac{1}{3}x_3 + 0 \cdot x_4 = -\frac{1}{3}x_3 \]</p>
+                                <p>\[ x_2 = \frac{1}{6}x_3 - \frac{3}{2}x_4 \]</p>
+                                
+                                <p>Step 5: Write the general solution.</p>
+                                <p>Let \( x_3 = s \) and \( x_4 = t \), then:</p>
+                                <p>\[ \vec{x} = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} = \begin{pmatrix} -\frac{1}{3}s \\ \frac{1}{6}s - \frac{3}{2}t \\ s \\ t \end{pmatrix} = s\begin{pmatrix} -\frac{1}{3} \\ \frac{1}{6} \\ 1 \\ 0 \end{pmatrix} + t\begin{pmatrix} 0 \\ -\frac{3}{2} \\ 0 \\ 1 \end{pmatrix} \]</p>
+                                
+                                <p>Simplifying the first vector by multiplying by 6:</p>
+                                <p>\[ \vec{x} = s\begin{pmatrix} -2 \\ 1 \\ 6 \\ 0 \end{pmatrix} + t\begin{pmatrix} 0 \\ -3 \\ 0 \\ 2 \end{pmatrix} \]</p>
+                                
+                                <p>Therefore, a basis for \( V^{\perp} \) is:</p>
+                                <p>\[ \left\{ \begin{pmatrix} -2 \\ 1 \\ 6 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ -3 \\ 0 \\ 2 \end{pmatrix} \right\} \]</p>
+                            </div>
+                            <div id="drawing-orthogonal-complement-1" class="drawing-area" style="display: none;">
+                                <canvas class="drawing-canvas"></canvas>
+                                <div class="drawing-toolbar">
+                                    <button class="toolbar-btn clear-btn"><i class="fas fa-trash"></i> Clear</button>
+                                    <button class="toolbar-btn undo-btn"><i class="fas fa-undo"></i> Undo</button>
+                                    <input type="color" class="color-picker" value="#000000">
+                                    <input type="range" class="stroke-width" min="1" max="10" value="2">
+                                    <button class="toolbar-btn check-solution-btn" data-problem="orthogonal-complement-1"><i class="fas fa-check"></i> Check Solution</button>
+                                </div>
+                                <div class="loading-spinner" id="loading-orthogonal-complement-1"></div>
+                                <div class="feedback-message" id="feedback-orthogonal-complement-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Continue with other Vector Spaces skills... -->
+            <!-- I'm showing just two samples for brevity -->
+
+        </section>
+
+        <section id="diff-equations-section" style="display: none;">
+            <h2><i class="fas fa-superscript"></i> Higher-Order Linear Differential Equations</h2>
+
+            <details>
+                <summary>Skill: Wronskian and Linear Independence of Functions</summary>
+                <div class="content">
+                    <div class="section-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h4>Key Concept</h4>
+                            </div>
+                            <p>The <strong>Wronskian</strong> is a determinant used to test for linear independence of a set of functions. It's particularly important for differential equations as it helps determine if a set of solutions forms a fundamental set.</p>
+                            <p>If the Wronskian of a set of functions is non-zero at even one point in an interval, then the functions are linearly independent on that interval.</p>
+                        </div>
+
+                        <div class="how-to card">
+                            <div class="card-header">
+                                <i class="fas fa-tasks"></i>
+                                <h4>How To Calculate the Wronskian</h4>
+                            </div>
+                            <ol>
+                                <li><strong>Calculate Derivatives:</strong> For functions \(f_1(x), f_2(x), ..., f_n(x)\), compute derivatives up to order \(n-1\).</li>
+                                <li><strong>Form Matrix:</strong> Create an \(n \times n\) matrix with:
+                                    <ul>
+                                        <li>Row 1: \(f_1(x), f_2(x), ..., f_n(x)\)</li>
+                                        <li>Row 2: \(f'_1(x), f'_2(x), ..., f'_n(x)\)</li>
+                                        <li>And so on until row n: \(f_1^{(n-1)}(x), f_2^{(n-1)}(x), ..., f_n^{(n-1)}(x)\)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Calculate Determinant:</strong> Compute the determinant of this matrix, denoted \(W(f_1, f_2, ..., f_n)(x)\).</li>
+                                <li><strong>Analyze Result:</strong>
+                                    <ul>
+                                        <li>If \(W(x) \neq 0\) for at least one point in the interval, the functions are <strong>linearly independent</strong>.</li>
+                                        <li>If \(W(x) = 0\) for all x in the interval, and the functions are solutions to the same linear homogeneous ODE, then they are <strong>linearly dependent</strong>.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                            <p>For common 2nd-order ODEs, the Wronskian of \(f(x)\) and \(g(x)\) is simply:</p>
+                            <p>\[W(f,g)(x) = \begin{vmatrix} f(x) & g(x) \\ f'(x) & g'(x) \end{vmatrix} = f(x)g'(x) - f'(x)g(x)\]</p>
+                        </div>
+                    </div>
+
+                    <div class="videos">
+                        <h4><i class="fas fa-video"></i> Video Resources</h4>
+                        <div class="video-container">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/fJSE6UdQHAg" title="How to Compute a Wronskian & Linear Independence" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive">
+                        <h4><i class="fas fa-pencil-alt"></i> Practice Problem</h4>
+                        <div class="practice-problem">
+                            <div class="problem-statement">
+                                <p>Determine if the functions \(f(x) = e^{2x}\) and \(g(x) = xe^{2x}\) are linearly independent on the interval \((-\infty, \infty)\) using the Wronskian.</p>
+                            </div>
+                            <div class="problem-controls">
+                                <button class="btn btn-secondary hint-btn" data-target="hint6">Show Hint</button>
+                                <button class="btn btn-primary solution-btn" data-target="solution6">Show Solution</button>
+                                <button class="btn btn-secondary write-solution-btn" data-problem="wronskian-1">Write Solution</button>
+                                <button class="btn btn-secondary" data-skill="wronskian">Mark as Completed</button>
+                            </div>
+                            <div id="hint6" class="hint">
+                                <p>Calculate the derivatives \(f'(x)\) and \(g'(x)\) first. Then compute the Wronskian determinant \(W(f,g)(x) = f(x)g'(x) - f'(x)g(x)\). Check if the result is zero or non-zero.</p>
+                            </div>
+                            <div id="solution6" class="solution">
+                                <h5>Solution:</h5>
+                                <p>Step 1: Calculate the derivatives.</p>
+                                <p>\(f(x) = e^{2x}\) → \(f'(x) = 2e^{2x}\)</p>
+                                <p>\(g(x) = xe^{2x}\) → \(g'(x) = e^{2x} + 2xe^{2x} = e^{2x}(1 + 2x)\)</p>
+                                
+                                <p>Step 2: Form the Wronskian determinant.</p>
+                                <p>\[W(f,g)(x) = \begin{vmatrix} e^{2x} & xe^{2x} \\ 2e^{2x} & e^{2x}(1 + 2x) \end{vmatrix}\]</p>
+                                <p>\[W(f,g)(x) = e^{2x} \cdot e^{2x}(1 + 2x) - 2e^{2x} \cdot xe^{2x}\]</p>
+                                <p>\[W(f,g)(x) = e^{4x}(1 + 2x) - 2xe^{4x}\]</p>
+                                <p>\[W(f,g)(x) = e^{4x}(1 + 2x - 2x) = e^{4x}\]</p>
+                                
+                                <p>Step 3: Analyze the result.</p>
+                                <p>Since \(W(f,g)(x) = e^{4x} \neq 0\) for all \(x \in (-\infty, \infty)\) (as \(e^{4x} > 0\) for all x), the functions \(f(x) = e^{2x}\) and \(g(x) = xe^{2x}\) are <strong>linearly independent</strong> on \((-\infty, \infty)\).</p>
+                            </div>
+                            <div id="drawing-wronskian-1" class="drawing-area" style="display: none;">
+                                <canvas class="drawing-canvas"></canvas>
+                                <div class="drawing-toolbar">
+                                    <button class="toolbar-btn clear-btn"><i class="fas fa-trash"></i> Clear</button>
+                                    <button class="toolbar-btn undo-btn"><i class="fas fa-undo"></i> Undo</button>
+                                    <input type="color" class="color-picker" value="#000000">
+                                    <input type="range" class="stroke-width" min="1" max="10" value="2">
+                                    <button class="toolbar-btn check-solution-btn" data-problem="wronskian-1"><i class="fas fa-check"></i> Check Solution</button>
+                                </div>
+                                <div class="loading-spinner" id="loading-wronskian-1"></div>
+                                <div class="feedback-message" id="feedback-wronskian-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Skill: Solve Homogeneous Linear Equations (Constant Coefficients)</summary>
+                <div class="content">
+                    <div class="section-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h4>Key Concept</h4>
+                            </div>
+                            <p>A <strong>homogeneous linear differential equation</strong> with constant coefficients has the form:</p>
+                            <p>\[a_n y^{(n)} + a_{n-1} y^{(n-1)} + \ldots + a_1 y' + a_0 y = 0\]</p>
+                            <p>where \(a_0, a_1, \ldots, a_n\) are constants and \(a_n \neq 0\).</p>
+                            <p>The general solution is a linear combination of \(n\) linearly independent solutions, where \(n\) is the order of the equation.</p>
+                        </div>
+
+                        <div class="how-to card">
+                            <div class="card-header">
+                                <i class="fas fa-tasks"></i>
+                                <h4>Solution Method</h4>
+                            </div>
+                            <ol>
+                                <li><strong>Form Characteristic Equation:</strong> Replace \(y^{(k)}\) with \(r^k\) to get:
+                                    <p>\[a_n r^n + a_{n-1} r^{n-1} + \ldots + a_1 r + a_0 = 0\]</p>
+                                </li>
+                                <li><strong>Find Roots:</strong> Solve the characteristic equation to find roots \(r_1, r_2, \ldots\)</li>
+                                <li><strong>Form Solution:</strong> For each distinct type of root:
+                                    <ul>
+                                        <li><strong>Distinct Real Root \(r\):</strong> Include \(e^{rx}\) in solution.</li>
+                                        <li><strong>Repeated Real Root \(r\) (multiplicity \(k\)):</strong> Include \(e^{rx}, xe^{rx}, \ldots, x^{k-1}e^{rx}\) in solution.</li>
+                                        <li><strong>Complex Conjugate Pair \(\alpha \pm i\beta\):</strong> Include \(e^{\alpha x}\cos(\beta x)\) and \(e^{\alpha x}\sin(\beta x)\) in solution.</li>
+                                        <li><strong>Repeated Complex Pair (multiplicity \(k\)):</strong> Include \(e^{\alpha x}\cos(\beta x), xe^{\alpha x}\cos(\beta x), \ldots, x^{k-1}e^{\alpha x}\cos(\beta x)\) and similar terms with \(\sin\).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Write General Solution:</strong> \(y(x) = C_1 y_1(x) + C_2 y_2(x) + \ldots + C_n y_n(x)\), where each \(y_i\) corresponds to a solution term and \(C_i\) are arbitrary constants.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="videos">
+                        <h4><i class="fas fa-video"></i> Video Resources</h4>
+                        <div class="video-selector">
+                            <button class="video-btn active" data-video="homo-video1">Video 1: Basic Method</button>
+                            <button class="video-btn" data-video="homo-video2">Video 2: Complex Examples</button>
+                        </div>
+                        <div class="video-container">
+                            <div id="homo-video1" class="video-embed active">
+                                <iframe src="https://www.youtube.com/embed/UFWAu8Ptth0" title="2nd order linear homogeneous differential equations 1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div id="homo-video2" class="video-embed" style="display: none;">
+                                <iframe src="https://www.youtube.com/embed/lF3CR_KpC48" title="Solving Homogeneous Linear Differential Equations" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive">
+                        <h4><i class="fas fa-pencil-alt"></i> Practice Problem</h4>
+                        <div class="practice-problem">
+                            <div class="problem-statement">
+                                <p>Find the general solution to the differential equation:</p>
+                                <p>\[y'' - 6y' + 9y = 0\]</p>
+                            </div>
+                            <div class="problem-controls">
+                                <button class="btn btn-secondary hint-btn" data-target="hint7">Show Hint</button>
+                                <button class="btn btn-primary solution-btn" data-target="solution7">Show Solution</button>
+                                <button class="btn btn-secondary write-solution-btn" data-problem="homogeneous-linear-eq-1">Write Solution</button>
+                                <button class="btn btn-secondary" data-skill="homogeneous-linear-eq">Mark as Completed</button>
+                            </div>
+                            <div id="hint7" class="hint">
+                                <p>Form the characteristic equation by replacing \(y''\) with \(r^2\) and \(y'\) with \(r\): \(r^2 - 6r + 9 = 0\). Then solve for \(r\) using the quadratic formula. Remember to handle repeated roots appropriately.</p>
+                            </div>
+                            <div id="solution7" class="solution">
+                                <h5>Solution:</h5>
+                                <p>Step 1: Form the characteristic equation.</p>
+                                <p>\[r^2 - 6r + 9 = 0\]</p>
+                                
+                                <p>Step 2: Solve for the roots using the quadratic formula.</p>
+                                <p>\[r = \frac{6 \pm \sqrt{36 - 36}}{2} = \frac{6 \pm 0}{2} = 3\]</p>
+                                
+                                <p>We have a repeated real root \(r = 3\) with multiplicity 2.</p>
+                                
+                                <p>Step 3: Form the general solution.</p>
+                                <p>For a repeated real root \(r\) with multiplicity \(k\), we include terms \(e^{rx}, xe^{rx}, \ldots, x^{k-1}e^{rx}\) in the solution.</p>
+                                <p>With \(r = 3\) and multiplicity 2, we include \(e^{3x}\) and \(xe^{3x}\).</p>
+                                
+                                <p>Step 4: Write the general solution.</p>
+                                <p>\[y(x) = C_1 e^{3x} + C_2 x e^{3x}\]</p>
+                                <p>where \(C_1\) and \(C_2\) are arbitrary constants.</p>
+                                
+                                <p>You can verify this is correct by substituting the solution back into the original differential equation.</p>
+                            </div>
+                            <div id="drawing-homogeneous-linear-eq-1" class="drawing-area" style="display: none;">
+                                <canvas class="drawing-canvas"></canvas>
+                                <div class="drawing-toolbar">
+                                    <button class="toolbar-btn clear-btn"><i class="fas fa-trash"></i> Clear</button>
+                                    <button class="toolbar-btn undo-btn"><i class="fas fa-undo"></i> Undo</button>
+                                    <input type="color" class="color-picker" value="#000000">
+                                    <input type="range" class="stroke-width" min="1" max="10" value="2">
+                                    <button class="toolbar-btn check-solution-btn" data-problem="homogeneous-linear-eq-1"><i class="fas fa-check"></i> Check Solution</button>
+                                </div>
+                                <div class="loading-spinner" id="loading-homogeneous-linear-eq-1"></div>
+                                <div class="feedback-message" id="feedback-homogeneous-linear-eq-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            
+            <!-- Additional differential equations skills will be added here -->
+            
+        </section>
+
+        <section id="practice-all-section" style="display: none;">
+            <h2><i class="fas fa-graduation-cap"></i> Practice Problems</h2>
+            <p>This section contains a comprehensive collection of practice problems covering all exam topics.</p>
+            
+            <!-- To be implemented -->
+        </section>
+
+    </div>
+
+    <!-- API Key Dialog -->
+    <div class="api-key-dialog" id="apiKeyDialog">
+        <div class="api-key-container">
+            <h3>Gemini API Settings</h3>
+            <p>Enter your Gemini API key to enable AI-powered handwriting recognition and solution checking.</p>
+            <div class="keys-stored" id="keysStored">
+                <i class="fas fa-check-circle"></i> API key saved successfully!
+            </div>
+            <input type="password" id="geminiApiKey" placeholder="Enter your Gemini API key">
+            <p><small>Your API key is stored locally in your browser and never sent to our servers. <a href="https://ai.google.dev/" target="_blank">Get a Gemini API key</a></small></p>
+            <div class="api-key-actions">
+                <button class="btn btn-secondary" id="cancelApiKey">Cancel</button>
+                <button class="btn btn-primary" id="saveApiKey">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to make the page interactive
+        document.addEventListener('DOMContentLoaded', function() {
+            // Skill completion tracking
+            const skillElements = document.querySelectorAll('[data-skill]');
+            const markCompletedButtons = document.querySelectorAll('[data-skill]');
+            
+            // Theme toggling
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const moonIcon = themeToggle.querySelector('.fa-moon');
+            
+            // Check if a dark theme preference is stored
+            const darkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (darkMode) {
+                body.classList.add('dark-mode');
+                moonIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    moonIcon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    moonIcon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+            
+            // Show/hide solution and hint
+            document.querySelectorAll('.solution-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const solutionDiv = document.getElementById(targetId);
+                    
+                    if (solutionDiv.style.display === 'block') {
+                        solutionDiv.style.display = 'none';
+                        this.textContent = 'Show Solution';
+                    } else {
+                        solutionDiv.style.display = 'block';
+                        this.textContent = 'Hide Solution';
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.hint-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const hintDiv = document.getElementById(targetId);
+                    
+                    if (hintDiv.style.display === 'block') {
+                        hintDiv.style.display = 'none';
+                        this.textContent = 'Show Hint';
+                    } else {
+                        hintDiv.style.display = 'block';
+                        this.textContent = 'Hide Hint';
+                    }
+                });
+            });
+            
+            // Progress tracking
+            markCompletedButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const skill = this.dataset.skill;
+                    localStorage.setItem(`skill-${skill}`, 'completed');
+                    updateProgressDisplay();
+                });
+            });
+            
+            function updateProgressDisplay() {
+                skillElements.forEach(element => {
+                    const skill = element.dataset.skill;
+                    if (localStorage.getItem(`skill-${skill}`) === 'completed') {
+                        element.classList.add('completed');
+                        if (element.tagName === 'BUTTON') {
+                            element.innerHTML = '<i class="fas fa-check"></i> Completed';
+                        }
+                    }
+                });
+                
+                // Update overall progress
+                const totalSkills = skillElements.length / 2; // Divide by 2 because we have two elements (card and button) for each skill
+                let completedSkills = 0;
+                
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('skill-') && localStorage.getItem(key) === 'completed') {
+                        completedSkills++;
+                    }
+                }
+                
+                const progressPercentage = Math.round((completedSkills / totalSkills) * 100);
+                document.getElementById('overall-progress').style.width = `${progressPercentage}%`;
+                document.getElementById('progress-status').textContent = `${progressPercentage}% Complete`;
+            }
+            
+            // Initialize progress display
+            updateProgressDisplay();
+            
+            // API Key Dialog Handling
+            const apiKeyDialog = document.getElementById('apiKeyDialog');
+            const apiSettingsBtn = document.getElementById('apiSettingsBtn');
+            const saveApiKeyBtn = document.getElementById('saveApiKey');
+            const cancelApiKeyBtn = document.getElementById('cancelApiKey');
+            const geminiApiKeyInput = document.getElementById('geminiApiKey');
+            const keysStoredNotification = document.getElementById('keysStored');
+            
+            // Check if API keys are already stored
+            const storedGeminiApiKey = localStorage.getItem('geminiApiKey');
+            if (storedGeminiApiKey) {
+                geminiApiKeyInput.value = storedGeminiApiKey;
+            }
+            
+            // Open API settings dialog
+            apiSettingsBtn.addEventListener('click', function() {
+                apiKeyDialog.style.display = 'flex';
+            });
+            
+            // Close API settings dialog
+            cancelApiKeyBtn.addEventListener('click', function() {
+                apiKeyDialog.style.display = 'none';
+                keysStoredNotification.style.display = 'none';
+            });
+            
+            // Save API key
+            saveApiKeyBtn.addEventListener('click', function() {
+                const geminiApiKey = geminiApiKeyInput.value.trim();
+                
+                if (geminiApiKey) {
+                    localStorage.setItem('geminiApiKey', geminiApiKey);
+                    keysStoredNotification.style.display = 'block';
+                    
+                    // Initialize Gemini API with the new key
+                    initializeGeminiApi();
+                    
+                    // Hide notification after 3 seconds
+                    setTimeout(() => {
+                        keysStoredNotification.style.display = 'none';
+                        apiKeyDialog.style.display = 'none';
+                    }, 3000);
+                }
+            });
+            
+            // Close dialog when clicking outside
+            apiKeyDialog.addEventListener('click', function(e) {
+                if (e.target === apiKeyDialog) {
+                    apiKeyDialog.style.display = 'none';
+                    keysStoredNotification.style.display = 'none';
+                }
+            });
+            
+            // Initialize Gemini API if key exists
+            let geminiModel = null;
+            
+            function initializeGeminiApi() {
+                const apiKey = localStorage.getItem('geminiApiKey');
+                if (apiKey) {
+                    try {
+                        const genAI = new GoogleGenerativeAI(apiKey);
+                        geminiModel = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+                        console.log("Gemini API initialized successfully");
+                        return true;
+                    } catch (error) {
+                        console.error("Error initializing Gemini API:", error);
+                        return false;
+                    }
+                }
+                return false;
+            }
+            
+            // Try to initialize on page load
+            initializeGeminiApi();
+            
+            // Drawing functionality for tablet pen input
+            const canvases = {};
+            const contexts = {};
+            const paths = {};
+            const redoPaths = {};
+            const colors = {};
+            const lineWidths = {};
+            const isDrawing = {};
+
+            function initializeDrawingCanvases(specificProblemId = null) {
+                const selector = specificProblemId ? 
+                    `#drawing-${specificProblemId} .drawing-canvas` : 
+                    '.drawing-canvas';
+                
+                document.querySelectorAll(selector).forEach(canvas => {
+                    const problemId = canvas.closest('.drawing-area').id.replace('drawing-', '');
+                    
+                    // Skip if already initialized
+                    if (canvases[problemId] && contexts[problemId]) {
+                        return;
+                    }
+                    
+                    // Set canvas dimensions to match container
+                    function resizeCanvas() {
+                        const rect = canvas.parentElement.getBoundingClientRect();
+                        canvas.width = rect.width;
+                        canvas.height = Math.max(300, rect.height);
+                        
+                        // If context exists and paths exist, redraw after resize
+                        if (contexts[problemId] && paths[problemId]) {
+                            contexts[problemId].lineCap = 'round';
+                            contexts[problemId].lineJoin = 'round';
+                            redrawPaths(problemId);
+                        }
+                    }
+                    
+                    // Initialize on load and resize
+                    resizeCanvas();
+                    window.addEventListener('resize', resizeCanvas);
+                    
+                    // Initialize canvas context and state
+                    canvases[problemId] = canvas;
+                    contexts[problemId] = canvas.getContext('2d');
+                    contexts[problemId].lineCap = 'round';
+                    contexts[problemId].lineJoin = 'round';
+                    paths[problemId] = paths[problemId] || [];
+                    redoPaths[problemId] = redoPaths[problemId] || [];
+                    colors[problemId] = colors[problemId] || '#000000';
+                    lineWidths[problemId] = lineWidths[problemId] || 2;
+                    isDrawing[problemId] = false;
+                    
+                    // Mouse event listeners
+                    canvas.addEventListener('mousedown', startDrawing);
+                    canvas.addEventListener('mousemove', draw);
+                    canvas.addEventListener('mouseup', stopDrawing);
+                    canvas.addEventListener('mouseout', stopDrawing);
+                    
+                    // Touch events
+                    canvas.addEventListener('touchstart', handleTouch(startDrawing));
+                    canvas.addEventListener('touchmove', handleTouch(draw));
+                    canvas.addEventListener('touchend', handleTouch(stopDrawing));
+                    
+                    // Pen events
+                    canvas.addEventListener('pointerdown', handlePointer(startDrawing));
+                    canvas.addEventListener('pointermove', handlePointer(draw));
+                    canvas.addEventListener('pointerup', handlePointer(stopDrawing));
+                    canvas.addEventListener('pointerout', handlePointer(stopDrawing));
+                });
+                
+                // Drawing toolbar controls
+                document.querySelectorAll('.clear-btn').forEach(btn => {
+                    btn.removeEventListener('click', clearCanvasHandler); // Remove previous listener if any
+                    btn.addEventListener('click', clearCanvasHandler);
+                });
+                
+                document.querySelectorAll('.undo-btn').forEach(btn => {
+                    btn.removeEventListener('click', undoStrokeHandler);
+                    btn.addEventListener('click', undoStrokeHandler);
+                });
+                
+                document.querySelectorAll('.color-picker').forEach(picker => {
+                    picker.removeEventListener('input', colorPickerHandler);
+                    picker.addEventListener('input', colorPickerHandler);
+                });
+                
+                document.querySelectorAll('.stroke-width').forEach(slider => {
+                    slider.removeEventListener('input', strokeWidthHandler);
+                    slider.addEventListener('input', strokeWidthHandler);
+                });
+                
+                document.querySelectorAll('.check-solution-btn').forEach(btn => {
+                    btn.removeEventListener('click', checkSolutionHandler);
+                    btn.addEventListener('click', checkSolutionHandler);
+                });
+            }
+
+            // Event handler functions to avoid duplicates
+            function clearCanvasHandler() {
+                const problemId = this.closest('.drawing-area').id.replace('drawing-', '');
+                clearCanvas(problemId);
+            }
+
+            function undoStrokeHandler() {
+                const problemId = this.closest('.drawing-area').id.replace('drawing-', '');
+                undoStroke(problemId);
+            }
+
+            function colorPickerHandler() {
+                const problemId = this.closest('.drawing-area').id.replace('drawing-', '');
+                colors[problemId] = this.value;
+            }
+
+            function strokeWidthHandler() {
+                const problemId = this.closest('.drawing-area').id.replace('drawing-', '');
+                lineWidths[problemId] = parseInt(this.value);
+            }
+
+            function checkSolutionHandler() {
+                const problemId = this.dataset.problem;
+                checkHandwrittenSolution(problemId);
+            }
+
+            // Initialize the drawing canvases
+            initializeDrawingCanvases();
+            
+            // Initialize drawing area toggle buttons
+            function initializeWriteSolutionButtons() {
+                // Toggle drawing area visibility
+                document.querySelectorAll('.write-solution-btn').forEach(btn => {
+                    // Remove existing event listeners if any (to prevent duplicates)
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+                    
+                    newBtn.addEventListener('click', function() {
+                        const problemId = this.dataset.problem;
+                        const drawingArea = document.getElementById(`drawing-${problemId}`);
+                        
+                        if (drawingArea) {
+                            if (drawingArea.style.display === 'block') {
+                                drawingArea.style.display = 'none';
+                                this.textContent = 'Write Solution';
+                            } else {
+                                drawingArea.style.display = 'block';
+                                this.textContent = 'Hide Writing Area';
+                                
+                                // Ensure canvas for this problem is initialized
+                                initializeDrawingCanvases(problemId);
+                                
+                                // Make sure canvas is properly sized when shown
+                                const canvas = drawingArea.querySelector('.drawing-canvas');
+                                if (canvas) {
+                                    const rect = canvas.parentElement.getBoundingClientRect();
+                                    canvas.width = rect.width;
+                                    canvas.height = Math.max(300, rect.height);
+                                }
+                            }
+                        } else {
+                            console.error(`Drawing area not found for problem ID: ${problemId}`);
+                        }
+                    });
+                });
+            }
+            
+            // Initialize write solution buttons
+            initializeWriteSolutionButtons();
+            
+            // Re-initialize buttons when details elements are toggled
+            document.querySelectorAll('details').forEach(details => {
+                details.addEventListener('toggle', function() {
+                    if (this.open) {
+                        // Re-initialize buttons in this details element
+                        setTimeout(initializeWriteSolutionButtons, 100);
+                    }
+                });
+            });
+            
+            // Handle touch events
+            function handleTouch(eventHandler) {
+                return function(e) {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    if (touch) {
+                        const rect = e.target.getBoundingClientRect();
+                        const clientX = touch.clientX - rect.left;
+                        const clientY = touch.clientY - rect.top;
+                        const mouseEvent = {
+                            clientX,
+                            clientY,
+                            target: e.target,
+                            preventDefault: () => e.preventDefault(),
+                            stopPropagation: () => e.stopPropagation()
+                        };
+                        eventHandler(mouseEvent);
+                    }
+                };
+            }
+            
+            // Handle pointer events (for stylus/pen)
+            function handlePointer(eventHandler) {
+                return function(e) {
+                    if (e.pointerType === 'pen' || e.pointerType === 'touch' || e.pointerType === 'mouse') {
+                        const rect = e.target.getBoundingClientRect();
+                        const clientX = e.clientX - rect.left;
+                        const clientY = e.clientY - rect.top;
+                        const mouseEvent = {
+                            clientX,
+                            clientY,
+                            target: e.target,
+                            preventDefault: () => e.preventDefault(),
+                            stopPropagation: () => e.stopPropagation()
+                        };
+                        eventHandler(mouseEvent);
+                    }
+                };
+            }
+
+            // Drawing functions
+            function startDrawing(e) {
+                e.preventDefault();
+                const canvas = e.target;
+                const problemId = canvas.closest('.drawing-area').id.replace('drawing-', '');
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                isDrawing[problemId] = true;
+                
+                // Start a new path
+                contexts[problemId].beginPath();
+                contexts[problemId].moveTo(x, y);
+                
+                // Store the path
+                paths[problemId].push({
+                    points: [{x, y}],
+                    color: colors[problemId],
+                    lineWidth: lineWidths[problemId]
+                });
+                
+                // Clear redo stack when drawing something new
+                redoPaths[problemId] = [];
+            }
+            
+            function draw(e) {
+                e.preventDefault();
+                const canvas = e.target;
+                const problemId = canvas.closest('.drawing-area').id.replace('drawing-', '');
+                
+                if (!isDrawing[problemId]) return;
+                
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Draw line
+                contexts[problemId].lineTo(x, y);
+                contexts[problemId].strokeStyle = colors[problemId];
+                contexts[problemId].lineWidth = lineWidths[problemId];
+                contexts[problemId].stroke();
+                
+                // Store the point
+                const currentPath = paths[problemId][paths[problemId].length - 1];
+                currentPath.points.push({x, y});
+            }
+            
+            function stopDrawing(e) {
+                e.preventDefault();
+                const problemId = e.target.closest('.drawing-area').id.replace('drawing-', '');
+                isDrawing[problemId] = false;
+                
+                // End the current path
+                contexts[problemId].closePath();
+                
+                // Hide any previous feedback
+                document.getElementById(`feedback-${problemId}`).style.display = 'none';
+            }
+            
+            function clearCanvas(problemId) {
+                const canvas = canvases[problemId];
+                const ctx = contexts[problemId];
+                
+                // Clear the canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Reset paths
+                paths[problemId] = [];
+                redoPaths[problemId] = [];
+                
+                // Hide any feedback
+                document.getElementById(`feedback-${problemId}`).style.display = 'none';
+            }
+            
+            function undoStroke(problemId) {
+                if (paths[problemId].length === 0) return;
+                
+                // Move the last path to redo stack
+                redoPaths[problemId].push(paths[problemId].pop());
+                
+                // Redraw remaining paths
+                redrawPaths(problemId);
+                
+                // Hide any feedback
+                document.getElementById(`feedback-${problemId}`).style.display = 'none';
+            }
+            
+            function redrawPaths(problemId) {
+                const canvas = canvases[problemId];
+                const ctx = contexts[problemId];
+                
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Redraw all paths
+                paths[problemId].forEach(path => {
+                    if (path.points.length === 0) return;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(path.points[0].x, path.points[0].y);
+                    
+                    path.points.forEach(point => {
+                        ctx.lineTo(point.x, point.y);
+                    });
+                    
+                    ctx.strokeStyle = path.color;
+                    ctx.lineWidth = path.lineWidth;
+                    ctx.stroke();
+                    ctx.closePath();
+                });
+            }
+            
+            // Function to check the handwritten solution using Gemini API
+            async function checkHandwrittenSolution(problemId) {
+                // Show loading spinner
+                const loadingSpinner = document.getElementById(`loading-${problemId}`);
+                loadingSpinner.style.display = 'block';
+                
+                // Capture canvas as image
+                const canvas = canvases[problemId];
+                const imageData = canvas.toDataURL('image/png');
+                
+                // Get feedback element
+                const feedbackElement = document.getElementById(`feedback-${problemId}`);
+                
+                // Problem information for context
+                const problemInfo = {
+                    'linear-independence-1': {
+                        problem: "Determine if the vectors v₁=[1,2,1], v₂=[3,1,0], and v₃=[7,5,1] are linearly independent.",
+                        expected: "The vectors are linearly dependent. We can write v₃ = 2v₁ + (5/3)v₂.",
+                        keywords: ['linearly dependent', 'v3 = 2v1 + (5/3)v2', 'free variable', 'c3'],
+                        conclusion: 'linearly dependent'
+                    },
+                    'linear-combination-1': {
+                        problem: "Determine if the vector b=[2,5,3] is in the span of v₁=[1,2,0] and v₂=[0,1,1].",
+                        expected: "The vector b is not in the span of v₁ and v₂. The system of equations leads to an inconsistent system with 0=2.",
+                        keywords: ['not in span', 'inconsistent', 'contradiction', '0=2'],
+                        conclusion: 'not in span'
+                    },
+                    'basis-space-1': {
+                        problem: "Find a basis for the row space, column space, and null space of the matrix A=[[1,2,3,4],[2,4,6,8],[3,5,7,9]].",
+                        expected: "Row space basis: {[1,0,-1,-2], [0,1,2,3]}. Column space basis: {[1,2,3], [2,4,5]}. Null space basis: {[1,-2,1,0], [2,-3,0,1]}. Rank: 2. Nullity: 2.",
+                        keywords: ['row space', 'column space', 'null space', 'rank 2', 'nullity 2', 'RREF', 'pivot columns'],
+                        conclusion: 'rank 2 and nullity 2'
+                    },
+                    'inner-product-1': {
+                        problem: "For vectors u=(3,-1,4) and v=(2,5,1), calculate the inner product, lengths, distance, angle, and determine if they are orthogonal.",
+                        expected: "Inner product u·v=5. Lengths: |u|≈5.10, |v|≈5.48. Distance d(u,v)≈6.78. Angle θ≈79.7°. The vectors are not orthogonal.",
+                        keywords: ['inner product', 'dot product', 'length', 'norm', 'distance', 'angle', 'orthogonal', 'not orthogonal'],
+                        conclusion: 'vectors are not orthogonal'
+                    },
+                    'orthogonal-complement-1': {
+                        problem: "Find a basis for the orthogonal complement of the subspace V of ℝ⁴ spanned by the vectors v₁=(1,2,0,3) and v₂=(2,1,1,0).",
+                        expected: "A basis for V⊥ consists of the vectors {[-2,1,6,0], [0,-3,0,2]}.",
+                        keywords: ['orthogonal complement', 'basis', 'null space', 'RREF', 'free variables'],
+                        conclusion: 'basis for orthogonal complement has 2 vectors'
+                    },
+                    'wronskian-1': {
+                        problem: "Determine if the functions f(x)=e^(2x) and g(x)=xe^(2x) are linearly independent on the interval (-∞,∞) using the Wronskian.",
+                        expected: "The Wronskian W(f,g)(x)=e^(4x)≠0 for all x, so the functions are linearly independent.",
+                        keywords: ['Wronskian', 'linearly independent', 'determinant', 'derivatives'],
+                        conclusion: 'functions are linearly independent'
+                    },
+                    'homogeneous-linear-eq-1': {
+                        problem: "Find the general solution to the differential equation y''-6y'+9y=0.",
+                        expected: "The general solution is y(x)=C₁e^(3x)+C₂xe^(3x).",
+                        keywords: ['characteristic equation', 'repeated root', 'r=3', 'general solution'],
+                        conclusion: 'general solution is y(x)=C₁e^(3x)+C₂xe^(3x)'
+                    },
+                    'basis-space': {
+                        problem: "Find a basis for the null space and column space of A=[1,2,3,4; 5,6,7,8; 9,10,11,12].",
+                        expected: "A has rank 2, nullity 2. The basis for the null space contains 2 vectors, and the basis for the column space contains 2 vectors.",
+                        keywords: ['rank 2', 'nullity 2', 'basis null space', 'basis column space'],
+                        conclusion: 'rank 2'
+                    },
+                    'wronskian': {
+                        problem: "Use the Wronskian to determine if f₁(x)=e^(2x) and f₂(x)=e^(−2x) are linearly independent.",
+                        expected: "The Wronskian is W(f₁,f₂)=4e^0=4≠0, so the functions are linearly independent.",
+                        keywords: ['e^4x', 'linearly independent', 'Wronskian', 'non-zero'],
+                        conclusion: 'linearly independent'
+                    },
+                    'homogeneous-linear-eq': {
+                        problem: "Find the general solution to the differential equation y''-6y'+9y=0.",
+                        expected: "The general solution is y(x)=C₁e^(3x)+C₂xe^(3x).",
+                        keywords: ['C1e^3x + C2xe^3x', 'repeated root', 'r=3', 'characteristic equation'],
+                        conclusion: 'C1e^3x + C2xe^3x'
+                    }
+                };
+                
+                // Check if Gemini API is initialized
+                if (!geminiModel) {
+                    const initialized = initializeGeminiApi();
+                    if (!initialized) {
+                        // Show API key dialog if not initialized
+                        loadingSpinner.style.display = 'none';
+                        apiKeyDialog.style.display = 'flex';
+                        
+                        feedbackElement.className = 'feedback-message feedback-incorrect';
+                        feedbackElement.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please set up your Gemini API key to check solutions.';
+                        feedbackElement.style.display = 'block';
+                        return;
+                    }
+                }
+                
+                try {
+                    // Convert the dataURL to a file blob for Gemini API
+                    const fetchResponse = await fetch(imageData);
+                    const blob = await fetchResponse.blob();
+                    const imageFile = {
+                        inlineData: {
+                            data: imageData.split(',')[1],
+                            mimeType: 'image/png'
+                        }
+                    };
+                    
+                    // Create the prompt for Gemini
+                    const prompt = `You are a math professor grading a student's handwritten work. The problem is: "${problemInfo[problemId].problem}". 
+                    
+                    The correct answer is "${problemInfo[problemId].expected}".
+                    
+                    Analyze the handwritten work in the image and determine if the student's solution is correct, partially correct, or incorrect. 
+                    
+                    1. Look for these key elements: ${problemInfo[problemId].keywords.join(', ')}
+                    2. The final conclusion should show that ${problemInfo[problemId].conclusion}
+                    
+                    Respond with a JSON object with these fields:
+                    {
+                      "isCorrect": true/false,
+                      "isPartiallyCorrect": true/false,
+                      "feedback": "Your specific feedback to the student explaining what they did right or wrong.",
+                      "explanation": "Your detailed explanation of the solution for educational purposes."
+                    }`;
+                    
+                    // Call Gemini API
+                    const result = await geminiModel.generateContent([prompt, imageFile]);
+                    const geminiResponse = await result.response;
+                    const text = geminiResponse.text();
+                    
+                    // Try to parse the JSON response
+                    let analysisResult;
+                    try {
+                        // Extract JSON from the response (it might be wrapped in ```json ... ```)
+                        const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/) || text.match(/{[\s\S]*?}/);
+                        const jsonString = jsonMatch ? jsonMatch[0].replace(/```json|```/g, '') : text;
+                        analysisResult = JSON.parse(jsonString);
+                    } catch (parseError) {
+                        // If not valid JSON, create a simple object with the text
+                        console.error("Error parsing Gemini response:", parseError);
+                        analysisResult = {
+                            isCorrect: text.includes("correct") && !text.includes("incorrect"),
+                            isPartiallyCorrect: text.includes("partially") || text.includes("almost"),
+                            feedback: text.substring(0, 200) + "...",
+                            explanation: text
+                        };
+                    }
+                    
+                    // Display feedback based on the analysis
+                    loadingSpinner.style.display = 'none';
+                    
+                    if (analysisResult.isCorrect) {
+                        feedbackElement.className = 'feedback-message feedback-correct';
+                        feedbackElement.innerHTML = `<i class="fas fa-check-circle"></i> ${analysisResult.feedback}`;
+                    } else if (analysisResult.isPartiallyCorrect) {
+                        feedbackElement.className = 'feedback-message feedback-partial';
+                        feedbackElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${analysisResult.feedback}`;
+                    } else {
+                        feedbackElement.className = 'feedback-message feedback-incorrect';
+                        feedbackElement.innerHTML = `<i class="fas fa-times-circle"></i> ${analysisResult.feedback}`;
+                    }
+                    
+                    feedbackElement.style.display = 'block';
+                    
+                } catch (error) {
+                    console.error("Error calling Gemini API:", error);
+                    loadingSpinner.style.display = 'none';
+                    
+                    feedbackElement.className = 'feedback-message feedback-incorrect';
+                    feedbackElement.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Error analyzing your solution: ${error.message}. Please check your API key.`;
+                    feedbackElement.style.display = 'block';
+                }
+            }
+            
+            // Handle video selector buttons
+            function initializeVideoSelectors() {
+                document.querySelectorAll('.video-btn').forEach(btn => {
+                    // Remove existing event listeners if any
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+                    
+                    newBtn.addEventListener('click', function() {
+                        // Get the video ID and find all related video embeds
+                        const videoId = this.dataset.video;
+                        const videoContainer = this.closest('.video-selector').nextElementSibling;
+                        const videoEmbeds = videoContainer.querySelectorAll('.video-embed');
+                        
+                        // Get all buttons in this selector
+                        const buttons = this.closest('.video-selector').querySelectorAll('.video-btn');
+                        
+                        // First, hide all videos and remove active class from all buttons
+                        videoEmbeds.forEach(embed => {
+                            embed.style.display = 'none';
+                            embed.classList.remove('active');
+                        });
+                        
+                        buttons.forEach(button => {
+                            button.classList.remove('active');
+                        });
+                        
+                        // Show the selected video and mark this button as active
+                        const selectedVideo = videoContainer.querySelector(`#${videoId}`);
+                        if (selectedVideo) {
+                            selectedVideo.style.display = 'block';
+                            selectedVideo.classList.add('active');
+                            this.classList.add('active');
+                        } else {
+                            console.error(`Video element with ID ${videoId} not found`);
+                        }
+                    });
+                });
+            }
+            
+            // Initialize video selectors
+            initializeVideoSelectors();
+            
+            // Re-initialize video selectors when details elements are toggled
+            document.querySelectorAll('details').forEach(details => {
+                details.addEventListener('toggle', function() {
+                    if (this.open) {
+                        // Re-initialize video selectors in this details element
+                        setTimeout(initializeVideoSelectors, 100);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
