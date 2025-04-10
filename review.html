@@ -1919,11 +1919,9 @@
                     if (touch) {
                         const canvas = e.target;
                         const rect = canvas.getBoundingClientRect();
-                        const scrollX = window.scrollX || window.pageXOffset;
-                        const scrollY = window.scrollY || window.pageYOffset;
-                        const clientX = touch.clientX - rect.left - scrollX;
-                        const clientY = touch.clientY - rect.top - scrollY;
-                        console.log(`Touch event: clientX=${touch.clientX}, clientY=${touch.clientY}, rect.left=${rect.left}, rect.top=${rect.top}, scrollX=${scrollX}, scrollY=${scrollY}, adjustedX=${clientX}, adjustedY=${clientY}`);
+                        const clientX = touch.clientX - rect.left;
+                        const clientY = touch.clientY - rect.top;
+                        console.log(`Touch event: clientX=${touch.clientX}, clientY=${touch.clientY}, rect.left=${rect.left}, rect.top=${rect.top}, adjustedX=${clientX}, adjustedY=${clientY}`);
                         const mouseEvent = {
                             clientX,
                             clientY,
@@ -1943,11 +1941,9 @@
                         e.preventDefault();
                         const canvas = e.target;
                         const rect = canvas.getBoundingClientRect();
-                        const scrollX = window.scrollX || window.pageXOffset;
-                        const scrollY = window.scrollY || window.pageYOffset;
-                        const clientX = e.clientX - rect.left - scrollX;
-                        const clientY = e.clientY - rect.top - scrollY;
-                        console.log(`Pointer event: type=${e.pointerType}, clientX=${e.clientX}, clientY=${e.clientY}, rect.left=${rect.left}, rect.top=${rect.top}, scrollX=${scrollX}, scrollY=${scrollY}, adjustedX=${clientX}, adjustedY=${clientY}`);
+                        const clientX = e.clientX - rect.left;
+                        const clientY = e.clientY - rect.top;
+                        console.log(`Pointer event: type=${e.pointerType}, clientX=${e.clientX}, clientY=${e.clientY}, rect.left=${rect.left}, rect.top=${rect.top}, adjustedX=${clientX}, adjustedY=${clientY}`);
                         const mouseEvent = {
                             clientX,
                             clientY,
@@ -1966,11 +1962,9 @@
                 const canvas = e.target;
                 const problemId = canvas.closest('.drawing-area').id.replace('drawing-', '');
                 const rect = canvas.getBoundingClientRect();
-                const scrollX = window.scrollX || window.pageXOffset;
-                const scrollY = window.scrollY || window.pageYOffset;
-                const x = e.clientX - rect.left - scrollX;
-                const y = e.clientY - rect.top - scrollY;
-                console.log(`Start drawing: x=${x}, y=${y}, clientX=${e.clientX}, clientY=${e.clientY}, rect.left=${rect.left}, rect.top=${rect.top}, scrollX=${scrollX}, scrollY=${scrollY}`);
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                console.log(`Start drawing: x=${x}, y=${y}, clientX=${e.clientX}, clientY=${e.clientY}, rect.left=${rect.left}, rect.top=${rect.top}`);
                 
                 isDrawing[problemId] = true;
                 
@@ -1997,11 +1991,9 @@
                 if (!isDrawing[problemId]) return;
                 
                 const rect = canvas.getBoundingClientRect();
-                const scrollX = window.scrollX || window.pageXOffset;
-                const scrollY = window.scrollY || window.pageYOffset;
-                const x = e.clientX - rect.left - scrollX;
-                const y = e.clientY - rect.top - scrollY;
-                console.log(`Drawing: x=${x}, y=${y}, clientX=${e.clientX}, clientY=${e.clientY}, rect.left=${rect.left}, rect.top=${rect.top}, scrollX=${scrollX}, scrollY=${scrollY}`);
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                console.log(`Drawing: x=${x}, y=${y}, clientX=${e.clientX}, clientY=${e.clientY}, rect.left=${rect.left}, rect.top=${rect.top}`);
                 
                 // Draw line
                 contexts[problemId].lineTo(x, y);
